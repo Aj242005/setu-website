@@ -23,6 +23,16 @@ Metadata and reports must now be committed; APK binaries remain outside Git.
    command. `vercel.json` supplies these settings; remove conflicting dashboard
    overrides. Redeploy the new commit, not the preceding failed commit.
 
+### Preserve report checksums across Windows and Linux
+
+Reports are verified byte-for-byte. `reports/.gitattributes` disables Git text
+conversion for that directory. Without it, Windows CRLF reports become LF in
+Git, causing a Vercel checksum failure even when a local build passes.
+When adding this rule to an existing checkout, run `git add reports/.gitattributes`
+and `git add --renormalize reports` before committing and pushing the fix.
+This preserves the original verified bytes; do not change the published hashes
+or remove checksum validation to make a build pass.
+
 The build fails if metadata or reports are missing/tampered, or the matching
 GitHub APK is absent. The GitHub publisher verifies the hosted asset's SHA-256
 and size before updating metadata. No GitHub token is needed in Vercel or the
