@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F4F6F2">
+  <meta name="description" content="Meet SETU: offline maps, GPS and sensor recording, and experimental navigation between GPS fixes. Join the Android beta.">
+  <title>SETU — Every journey teaches us something.</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="header wrap">
+    <a class="brand" href="#" aria-label="SETU home"><img src="assets/mark.svg" width="43" height="43" alt=""><span>SETU</span></a>
+    <nav aria-label="Main navigation"><a href="#experience">The app</a><a href="#evidence">The evidence</a><a href="#participate">Join the beta <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> An open journey · Android beta</p>
+        <h1 id="hero-title">Every journey<br>teaches us<br><em>something.</em></h1>
+        <p class="intro">Your route is more than a GPS signal. SETU brings offline maps, satellite fixes and phone sensors together—and records the gaps so we can learn from them.</p>
+        <div class="actions"><a class="button" href="#download">Get the Android beta <span aria-hidden="true">↓</span></a><a class="text-link" href="#evidence">See what works today <span aria-hidden="true">↗</span></a></div>
+        <p class="beta-note">Built for testing, not navigation you should rely on.<br>GPS-free accuracy is still under development.</p>
+      </div>
+      <figure class="app-figure">
+        <div class="phone"><img src="assets/app-demo.png" width="1080" height="2400" alt="SETU’s real Android demo showing a green reference route, a blue sensor estimate and a simulated GPS outage." fetchpriority="high"></div>
+        <figcaption><span class="caption-rule"></span> The app, as it is.<br><span>Simulated sensor demo. Not a road-accuracy result.</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="experience wrap chapter" id="experience" aria-labelledby="experience-title">
+      <div class="chapter-heading"><p class="kicker">A clearer picture of the journey</p><h2 id="experience-title">Record together.<br>Understand the difference.</h2></div>
+      <div class="steps">
+        <article><span class="step-word">Before the ride</span><h3>A map that stays with you.</h3><p>Delhi &amp; NCR maps are stored on your phone. Plan a route, choose Walking or Two-wheeler, and get a good GPS fix before recording.</p></article>
+        <article><span class="step-word">Along the way</span><h3>One trip. Multiple signals.</h3><p>Record GPS, accelerometer and gyroscope measurements together. A fixed phone position and a clear account of the ride make the data more useful.</p></article>
+        <article><span class="step-word">After you arrive</span><h3>Keep the evidence.</h3><p>Save the trip, review it and explicitly export a training bundle. GPS-withheld replay compares estimates with recorded fixes without feeding those fixes to the estimator.</p></article>
+      </div>
+    </section>
+
+    <section class="evidence-band" id="evidence" aria-labelledby="evidence-title">
+      <div class="wrap evidence-layout">
+        <div><p class="kicker">Evidence before promises</p><h2 id="evidence-title">The gaps matter.<br>We count them.</h2><p>Our target is at least 90% of GPS-free position updates within 10 metres. Missing estimates count as failures. <strong>That target is not yet met.</strong></p><p class="quiet">The table uses three real, same-phone scooter recordings. Withheld phone GPS is a comparison reference, not independent surveyed ground truth.</p><div class="actions"><a class="text-link" href="reports/report.md" id="report-link" hidden>Read the full test report <span aria-hidden="true">↗</span></a><a class="text-link" href="#evidence" id="pdf-report-link" hidden>Download test PDF <span aria-hidden="true">↓</span></a></div></div>
+        <div class="results"><p id="results-status" role="status">Loading the latest verification…</p><div class="table-scroll"><table id="results-table" hidden><caption>Requested GPS-withheld durations</caption><thead><tr><th scope="col">GPS gap</th><th scope="col">Verified within 10 m</th><th scope="col">Available / expected</th></tr></thead><tbody id="results-body"></tbody></table></div><p class="quiet">Percentages divide verified successes by every expected update. Missing references remain unknown, so these are conservative lower bounds, not a promise of live road performance. The simulated app demo is separate.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap chapter release-layout" id="download" aria-labelledby="download-title">
+      <div><p class="kicker">For curious, careful testers</p><h2 id="download-title">Take the beta<br>for a test.</h2><p>Android 8 or newer. Offline maps are included, so the APK is a substantial download. Your recordings stay on the phone unless you choose to export them.</p><p><strong>This is a development build.</strong> Use a trusted navigation app for real journeys. Do not handle your phone while riding or driving.</p></div>
+      <div class="release">
+        <div class="release-top"><h3>SETU for Android</h3><span class="tag">Development beta</span></div>
+        <p id="release-meta">Checking the current APK…</p>
+        <button class="button download" id="download-apk" type="button" disabled>Checking download…</button>
+        <p id="release-warning" class="release-warning" role="status">Only an APK with matching device-verification evidence is published here.</p>
+        <a class="text-link" href="release.json">See exact verification details ↗</a>
+        <details><summary>Verify this download</summary><p>Compare the SHA-256 of your downloaded file with this value:</p><code id="apk-hash">Not available yet</code><button class="copy-button" type="button" id="copy-hash" disabled>Copy SHA-256</button><p id="copy-status" role="status"></p><a href="release.json">View release metadata</a></details>
+        <details><summary>Install and make your first recording</summary><ol><li>Download the APK. Only allow installation from a source you trust.</li><li>Open SETU and allow location and sensor-related permissions when requested.</li><li>Choose the correct activity. Keep Location on, fix the phone securely and record your trip.</li><li>Stop safely, then choose Stop &amp; save. Review the trip before exporting.</li></ol></details>
+      </div>
+    </section>
+
+    <section class="wrap chapter participate" id="participate" aria-labelledby="participate-title">
+      <div><p class="kicker">Help shape the next kilometre</p><h2 id="participate-title">Better data.<br>Better questions.<br>Better journeys.</h2></div>
+      <div><p class="intro">You don’t need a perfect route. We need an honest record of what happened.</p><p>Tell us your phone, activity, mount position and whether it changed. Report a confusing screen, a missing route or an unexpected speed. Every reproducible finding helps.</p><a class="button" href="https://github.com/LakshyaJ1/SETU/issues/new?title=SETU%20beta%20testing&amp;body=Phone%20model%3A%0AActivity%3A%0AMount%20position%3A%0AWhat%20I%20observed%3A%0ASteps%20to%20reproduce%3A%0A%0APlease%20arrange%20a%20private%20handoff%20for%20location%20recordings." target="_blank" rel="noopener noreferrer">Join or share feedback on GitHub <span aria-hidden="true">↗</span></a><p class="privacy-note">GPS logs can reveal your home and routine. <strong>Do not attach raw location recordings to a public issue.</strong> Ask the team for a private handoff first. This website does not upload your data.</p></div>
+    </section>
+  </main>
+  <footer class="wrap footer"><a class="brand" href="#"><img src="assets/mark.svg" width="35" height="35" alt=""><span>SETU</span></a><p>Seamless Egomotion Tracking under Unavailable-GNSS</p><a href="https://github.com/LakshyaJ1/SETU" target="_blank" rel="noopener noreferrer">Explore the project ↗</a></footer>
+  <noscript><p class="wrap">JavaScript is disabled. The <a href="release.json">release metadata</a> contains the verified APK download path and hash.</p></noscript>
+</body>
+</html>
