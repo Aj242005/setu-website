@@ -1,0 +1,6 @@
+downloads/
+*.apk
+**/*.apk
+*.partial
+.git/
+.impeccable/

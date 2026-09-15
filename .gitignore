@@ -1,4 +1,4 @@
 downloads/
-release.json
-reports/
+*.apk
 *.partial
+.vercel/

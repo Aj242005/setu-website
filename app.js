@@ -29,7 +29,7 @@ async function loadRelease() {
     downloadButton.addEventListener('click', () => {
       const link = document.createElement('a');
       link.href = release.apk;
-      link.download = 'SETU-latest-beta.apk';
+      link.download = 'SETU-qa-beta.apk';
       document.body.append(link);
       link.click();
       link.remove();

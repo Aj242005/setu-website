@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "node scripts/verify-release.mjs",
+  "installCommand": "",
+  "outputDirectory": ".",
+  "headers": [
+    {
+      "source": "/release.json",
+      "headers": [{"key": "Cache-Control", "value": "no-store, max-age=0"}]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/downloads/:asset*",
+      "destination": "https://github.com/Aj242005/setu-website/releases/download/android-beta/:asset*",
+      "permanent": false
+    }
+  ]
+}
