@@ -50,6 +50,19 @@ overview intentionally shows the whole journey; Follow car provides the close vi
 
 ## Repeat the user-facing check
 
+### Live deployment check
+
+Commit `5fd554a` was pushed to `Aj242005/setu-website` and verified on
+`https://seamless-egomotion-tracking-for-unavailable-gnss.vercel.app/`.
+The live WebGL scene and all three phase buttons worked. At 1366 × 768, Play was
+visible in the first viewport. Live metadata was non-cacheable and the report
+hash matched. Clicking the real website download button completed a 211636530-byte
+APK download, whose SHA-256 matched the supplied artifact. The browser saved its
+immutable asset name, `1dd5fbfd0a83517c.apk`. Global Privacy Control suppressed the
+analytics script. This verifies website delivery, not Android runtime behavior.
+
+### Manual reproduction
+
 1. Serve this directory with `python -m http.server 4173 --bind 127.0.0.1`.
 2. Open the page. Nothing should animate before Play; check the concept disclaimer.
 3. Play through entry, tunnel and exit. The inset map must show GPS, then an IMU
