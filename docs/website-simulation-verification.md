@@ -36,9 +36,7 @@ mobile GPS-label and fallback-message placement; thin-roof self-shadow artifacts
 The primary play control fits a normal desktop first viewport. Small-screen
 overview intentionally shows the whole journey; Follow car provides the close view.
 
-## Exact supplied APK
-
-### Tracking-map projection regression
+## Tracking-map projection regression
 
 The original inset negated world Z and used unequal axis scales, mirroring and
 stretching the road. It now uses +X to the right and +Z down at a uniform scale.
@@ -48,7 +46,7 @@ road/tunnel paths, marker and uncertainty at four phases, stable orientation whe
 switching 3D cameras, and identical map geometry with WebGL unavailable. Desktop
 and mobile screenshots were reviewed; the existing interaction checks also passed.
 
-## Exact supplied APK artifact
+## Exact supplied APK
 
 - Filename: `setu-v0.1.0.apk`; package `com.setu.navigator`; version 0.1.0 / code 1.
 - Bytes: 211636530.
