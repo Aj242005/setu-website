@@ -1,29 +1,19 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
+import { validateRelease } from '../release-validation.mjs';
 
 try {
   const release = JSON.parse(await readFile('release.json', 'utf8'));
-  assert.match(release.sha256, /^[a-f0-9]{64}$/);
-  assert.equal(release.apk, `downloads/${release.sha256.slice(0, 16)}.apk`);
-  assert(Number.isSafeInteger(release.bytes) && release.bytes > 0);
-  assert(Number.isFinite(new Date(release.publishedAt).getTime()));
-  assert.equal(release.navigationAccuracyApproved, false);
-  assert.equal(release.verification?.sha256, release.sha256);
-  assert.equal(release.verification?.bytes, release.bytes);
-  for (const key of ['signatureVerified', 'zip16KiBAligned', 'installedSha256Matches']) {
-    assert.equal(release.verification?.[key], true, `${key} is not verified`);
-  }
-  assert.equal(release.qa?.apkSha256, release.sha256);
-  for (const [field, hashField, extension] of [
-    ['report', 'markdownSha256', 'md'], ['reportPdf', 'pdfSha256', 'pdf'],
-  ]) {
-    const checksum = release.qa.artifacts?.[hashField];
-    assert.match(checksum, /^[a-f0-9]{64}$/);
-    assert.equal(release[field], `reports/${checksum.slice(0, 16)}.${extension}`);
-    const contents = await readFile(release[field]);
+  const level = validateRelease(release);
+  const reports = level === 'artifact-only' ? [[release.report, release.inspectionReportSha256]] : [
+    [release.report, release.qa.artifacts.markdownSha256], [release.reportPdf, release.qa.artifacts.pdfSha256],
+  ];
+  for (const [path, checksum] of reports) {
+    const contents = await readFile(path);
     assert.equal(createHash('sha256').update(contents).digest('hex'), checksum,
-      `${release[field]} does not match the verified report`);
+      `${path} does not match the verified report`);
+    if (level === 'artifact-only') assert(contents.toString('utf8').includes(release.sha256), 'Inspection must identify this APK');
   }
   const config = JSON.parse(await readFile('vercel.json', 'utf8'));
   const redirect = config.redirects.find(rule => rule.source === '/downloads/:asset*');
@@ -35,9 +25,9 @@ try {
   assert.equal(response.status, 200, 'Publish the matching APK to GitHub Releases first');
   assert.equal(Number(response.headers.get('content-length')), release.bytes,
     'The hosted APK has the wrong size');
-  console.log(`Verified release ${release.sha256}: reports present; hosted APK reachable.`);
+  console.log(`Verified ${level} release ${release.sha256}: reports present; hosted APK reachable.`);
 } catch (error) {
   console.error(`Incomplete beta deployment: ${error.message}`);
-  console.error('Publish with --github-release, then include release.json and reports in the Git push.');
+  console.error('Publish the matching GitHub Release asset, then include release.json and its hash-matched reports in the Git push.');
   process.exitCode = 1;
 }

@@ -7,21 +7,11 @@ async function loadRelease() {
     const response = await fetch('release.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('Release metadata unavailable');
     const release = await response.json();
-    if (!/^[a-f0-9]{64}$/.test(release.sha256) ||
-        !/^downloads\/[a-f0-9]{16}\.apk$/.test(release.apk) ||
-        release.apk !== `downloads/${release.sha256.slice(0, 16)}.apk` ||
-        !Number.isSafeInteger(release.bytes) || release.bytes <= 0 ||
-        release.navigationAccuracyApproved !== false ||
-        release.verification?.sha256 !== release.sha256 ||
-        release.verification?.bytes !== release.bytes ||
-        !['signatureVerified', 'zip16KiBAligned', 'installedSha256Matches'].every(
-          key => release.verification?.[key] === true)) {
-      throw new Error('Invalid beta metadata');
-    }
+    const level = validateRelease(release);
     const date = new Date(release.publishedAt);
     if (!Number.isFinite(date.getTime())) throw new Error('Invalid release date');
     document.querySelector('#release-meta').textContent =
-      `${date.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })} · ${(release.bytes / 1048576).toFixed(1)} MB · ${release.sha256.slice(0, 8)}`;
+      `${release.versionName ? `v${release.versionName} · ` : ''}${date.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })} · ${(release.bytes / 1048576).toFixed(1)} MB · ${release.sha256.slice(0, 8)}`;
     hashLabel.textContent = release.sha256;
     copyButton.disabled = false;
     downloadButton.disabled = false;
@@ -29,13 +19,22 @@ async function loadRelease() {
     downloadButton.addEventListener('click', () => {
       const link = document.createElement('a');
       link.href = release.apk;
-      link.download = 'SETU-qa-beta.apk';
+      link.download = release.downloadName ?? `setu-${release.sha256.slice(0, 8)}.apk`;
       document.body.append(link);
       link.click();
       link.remove();
     });
     const failures = release.verification.combined?.failures ?? release.verification.deviceFailures;
     const warnings = [];
+    if (level === 'artifact-only') {
+      warnings.push('File signature and alignment checked. Development-signed preview; device behavior and navigation accuracy are not verified for this APK.');
+      document.querySelector('#results-status').textContent = 'This exact APK has artifact checks, not a new device-accuracy report.';
+      document.querySelector('#artifact-checks').hidden = false;
+      const reportLink = document.querySelector('#report-link');
+      reportLink.href = release.report;
+      reportLink.textContent = 'Read this APK’s inspection report ↗';
+      reportLink.hidden = false;
+    }
     if (release.verification.backgroundCaptureApproved === false) {
       warnings.push('Keep SETU visible while recording: background sensor gaps remain.');
     }
@@ -43,7 +42,7 @@ async function loadRelease() {
     warnings.push('GPS-free accuracy is not approved.');
     document.querySelector('#release-warning').textContent = warnings.join(' ');
     const rows = release.qa?.durations;
-    if (Array.isArray(rows) && rows.length === 6) {
+    if (level === 'device-tested' && Array.isArray(rows) && rows.length === 6) {
       for (const row of rows) {
         const element = document.createElement('tr');
         for (const value of [`${row.seconds} s`, `${row.jointSuccessPercent.toFixed(2)}%`,
@@ -55,6 +54,7 @@ async function loadRelease() {
         document.querySelector('#results-body').append(element);
       }
       document.querySelector('#results-table').hidden = false;
+      document.querySelector('#device-results-notes').hidden = false;
       document.querySelector('#results-status').textContent = 'Measured on the OnePlus Nord CE3 Lite.';
       if (/^reports\/[a-f0-9]{16}\.md$/.test(release.report)) {
         document.querySelector('#report-link').href = release.report;
@@ -64,7 +64,7 @@ async function loadRelease() {
         document.querySelector('#pdf-report-link').href = release.reportPdf;
         document.querySelector('#pdf-report-link').hidden = false;
       }
-    } else {
+    } else if (level === 'device-tested') {
       document.querySelector('#results-status').textContent =
         'The six-duration report is not attached to this build yet. No accuracy figures are claimed.';
     }
@@ -89,3 +89,4 @@ copyButton.addEventListener('click', async () => {
 });
 
 loadRelease();
+import { validateRelease } from './release-validation.mjs';

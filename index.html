@@ -11,27 +11,47 @@
   <title>SETU — More than a GPS dot.</title>
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="simulation.css">
+  <script type="module" src="app.js"></script>
   <script src="analytics.js" defer></script>
+  <script type="module" src="simulation.mjs"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="header wrap">
     <a class="brand" href="#" aria-label="SETU home"><img src="assets/mark.svg" width="43" height="43" alt=""><span>SETU</span></a>
-    <nav aria-label="Main navigation"><a href="#experience">The app</a><a href="#architecture">How it works</a><a href="#evidence">Results</a><a href="#download">Get SETU <span aria-hidden="true">↓</span></a></nav>
+    <nav aria-label="Main navigation"><a href="#simulation">3D demo</a><a href="#experience">The app</a><a href="#architecture">How it works</a><a href="#download">Get SETU <span aria-hidden="true">↓</span></a></nav>
   </header>
   <main id="main">
+    <section class="simulation-section wrap" id="simulation" aria-labelledby="simulation-title">
+      <div class="simulation-intro"><div><p class="kicker">A journey beyond the signal</p><h1 id="simulation-title">The signal fades.<br><em>The story continues.</em></h1></div><div><p class="intro">Follow a car into a tunnel. See how motion sensors can carry an estimate forward—and how returning GPS helps correct accumulated drift.</p><p class="simulation-disclaimer" id="simulation-disclaimer"><strong>Interactive concept, not a performance claim.</strong> Synthetic sensors and a simplified browser estimator. This does not run the Android app or its AI model.</p></div></div>
+      <div class="simulation-stage" id="simulation-stage" data-phase="gps">
+        <div id="scene-canvas" class="scene-canvas" aria-hidden="true"></div>
+        <p class="scene-loading" id="scene-loading" role="status">Loading 3D… The map and controls work while it loads.</p>
+        <div class="scene-status"><span class="phase-label" id="sim-phase">GPS connected</span><p id="sim-description" role="status">Satellite fixes anchor the position before the tunnel.</p></div>
+        <span id="car-signal" class="car-signal" hidden>GPS</span>
+        <div class="scene-play"><button class="button" id="sim-play" type="button" aria-describedby="simulation-disclaimer" disabled>Play journey <span aria-hidden="true">▶</span></button><button class="scene-restart" id="sim-restart" type="button" disabled>Restart</button></div>
+        <figure class="mini-map"><figcaption>Tracking map <span>Illustrative</span></figcaption><svg viewBox="0 0 240 132" role="img" aria-label="Illustrative tracking map: green GPS fixes, blue sensor estimates and a growing uncertainty region inside the tunnel."><path id="mini-road" fill="none" stroke="#d4dfc3" stroke-width="17" stroke-linecap="round"/><path id="mini-tunnel" fill="none" stroke="#aab8aa" stroke-width="17" stroke-linecap="butt"/><path id="mini-gps" fill="none" stroke="#195a40" stroke-width="3"/><path id="mini-imu" fill="none" stroke="#2374bc" stroke-width="3"/><circle id="mini-uncertainty" r="2" fill="#2374bc" fill-opacity="0.13" stroke="#2374bc" stroke-opacity="0.5"/><circle id="mini-last-fix" r="3" fill="#a56820" stroke="#fcfdf9" stroke-width="2"/><circle id="mini-position" r="5" fill="#195a40" stroke="#fcfdf9" stroke-width="2"/><text x="118" y="23" text-anchor="middle">Tunnel</text></svg><div class="mini-legend"><span><i class="legend-gps"></i>GPS</span><span><i class="legend-imu"></i>Sensor estimate</span></div></figure>
+      </div>
+      <div class="simulation-console">
+        <div class="simulation-timeline"><label for="sim-time">Journey timeline</label><input id="sim-time" type="range" min="0" max="30" step="0.05" value="0" aria-valuetext="0 seconds, GPS connected" disabled><output id="sim-time-label" for="sim-time">0.0 / 30 s</output></div>
+        <div class="simulation-options"><div class="simulation-phases" aria-label="Explore a journey phase"><button type="button" data-time="3" aria-pressed="true">Before the tunnel</button><button type="button" data-time="15" aria-pressed="false">GPS lost</button><button type="button" data-time="22.5" aria-pressed="false">GPS returns</button></div><div class="simulation-toggles"><label><input id="sim-sensors" type="checkbox" checked> Sensor bridge</label><label><input id="sim-cutaway" type="checkbox" checked> Reveal tunnel interior</label><button id="sim-camera" type="button" aria-pressed="false">Follow car</button></div></div>
+      </div>
+      <dl class="simulation-telemetry"><div><dt>Position source</dt><dd id="sim-source">GPS fixes</dd></div><div><dt>Synthetic gyro</dt><dd><span id="sim-gyro">0.0</span> <small>°/s</small></dd></div><div><dt>Forward acceleration</dt><dd><span id="sim-acceleration">0.0</span> <small>m/s²</small></dd></div><div><dt>Illustrative position error</dt><dd><span id="sim-error">0.0</span> <small>m</small></dd></div></dl>
+      <p class="simulation-footnote">The car follows a fictional road; the blue marker is the estimate. During the outage, synthetic acceleration and gyro readings drive the estimate without GPS fixes. GPS recovery reduces current error gradually—it does not erase the past or guarantee zero error. Distances, timing and uncertainty here are illustrative, not supported outage durations for the APK.</p>
+      <noscript><p>The interactive journey needs JavaScript. The concept: GPS initializes position; sensor integration accumulates drift in the tunnel; returning GPS corrects the estimate. The Android download is a separate application.</p></noscript>
+    </section>
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="kicker"><span class="dot" aria-hidden="true"></span> Offline maps. Motion sensing. Android.</p>
-        <h1 id="hero-title">Your journey.<br>More than<br><em>a GPS dot.</em></h1>
+        <h2 id="hero-title">Your journey.<br>More than<br>a GPS dot.</h2>
         <p class="intro">Find a route on Delhi &amp; NCR maps stored on your phone. Record GPS and motion together. Understand what happens between satellite fixes—not just where the journey ends.</p>
         <div class="actions"><a class="button" href="#download">Explore the Android beta <span aria-hidden="true">↓</span></a><a class="text-link" href="#architecture">See how SETU works <span aria-hidden="true">↗</span></a></div>
         <p class="beta-note">Built for testing, not navigation you should rely on.<br>GPS-free accuracy is still under development.</p>
       </div>
       <figure class="app-figure">
-        <div class="phone"><img src="assets/app-demo.png" width="1080" height="2400" alt="SETU’s real Android demo showing a green reference route, a blue sensor estimate and a simulated GPS outage." fetchpriority="high"></div>
-        <figcaption><span class="caption-rule"></span> The app, as it is.<br><span>Simulated sensor demo. Not a road-accuracy result.</span></figcaption>
+        <div class="phone"><img src="assets/app-demo.png" width="1080" height="2400" alt="An earlier SETU Android build showing a green reference route, a blue sensor estimate and a simulated GPS outage." loading="lazy"></div>
+        <figcaption><span class="caption-rule"></span> Inside the Android app.<br><span>Earlier build capture. Simulated demo, not road-accuracy evidence.</span></figcaption>
       </figure>
     </section>
 
@@ -78,8 +98,8 @@
 
     <section class="evidence-band" id="evidence" aria-labelledby="evidence-title">
       <div class="wrap evidence-layout">
-        <div><p class="kicker">Evidence before promises</p><h2 id="evidence-title">The gaps matter.<br>We count them.</h2><p>Our target is at least 90% of GPS-free position updates within 10 metres. Missing estimates count as failures. <strong>That target is not yet met.</strong></p><p class="quiet">The table uses three real, same-phone scooter recordings. Withheld phone GPS is a comparison reference, not independent surveyed ground truth.</p><div class="actions"><a class="text-link" href="reports/report.md" id="report-link" hidden>Read the full test report <span aria-hidden="true">↗</span></a><a class="text-link" href="#evidence" id="pdf-report-link" hidden>Download test PDF <span aria-hidden="true">↓</span></a></div></div>
-        <div class="results"><p id="results-status" role="status">Loading the latest verification…</p><div class="table-scroll"><table id="results-table" hidden><caption>Requested GPS-withheld durations</caption><thead><tr><th scope="col">GPS gap</th><th scope="col">Verified within 10 m</th><th scope="col">Available / expected</th></tr></thead><tbody id="results-body"></tbody></table></div><p class="quiet">Percentages divide verified successes by every expected update. Missing references remain unknown, so these are conservative lower bounds, not a promise of live road performance. The simulated app demo is separate.</p><p class="quiet">Rows use different outage start times and counts; they are not a like-for-like duration comparison. In the report’s matched 90-second trials, no estimates were available after the first 10 seconds. A tested duration is not a supported tracking duration.</p></div>
+        <div><p class="kicker">Evidence before promises</p><h2 id="evidence-title">A clear view.<br>Of the limits, too.</h2><p>Our target is at least 90% of GPS-free position updates within 10 metres. Missing estimates count as failures. <strong>That target is not yet demonstrated.</strong></p><p class="quiet">The tunnel above explains a concept, not a measured result. Each Android download needs its own evidence; an earlier build’s test results do not certify a new APK.</p><div class="actions"><a class="text-link" href="#evidence" id="report-link" hidden>Read the full test report <span aria-hidden="true">↗</span></a><a class="text-link" href="#evidence" id="pdf-report-link" hidden>Download test PDF <span aria-hidden="true">↓</span></a></div></div>
+        <div class="results"><p id="results-status" role="status">Loading the latest verification…</p><dl class="differences" id="artifact-checks" hidden><div><dt>Verified file</dt><dd>APK signature, 16 KiB ZIP alignment, file size and SHA-256. The public download is pinned to this artifact.</dd></div><div><dt>Still to verify</dt><dd>Installation, recording continuity, maps and GPS-off accuracy on a device running this exact build.</dd></div><div><dt>A development preview</dt><dd>Android development signing, not a production release. The bundled speed model remains evaluation-only.</dd></div></dl><div class="table-scroll"><table id="results-table" hidden><caption>Requested GPS-withheld durations</caption><thead><tr><th scope="col">GPS gap</th><th scope="col">Verified within 10 m</th><th scope="col">Available / expected</th></tr></thead><tbody id="results-body"></tbody></table></div><div id="device-results-notes" hidden><p class="quiet">Same-phone GPS is a comparison reference, not independent surveyed ground truth. Percentages divide verified successes by every expected update; missing references remain unknown. A tested duration is not a supported tracking duration.</p><p class="quiet">Rows use different outage start times and counts; they are not a like-for-like duration comparison. See this build’s report for matched trials and limitations.</p></div></div>
       </div>
     </section>
 
@@ -88,7 +108,7 @@
       <div class="release">
         <div class="release-top"><h3>SETU for Android</h3><span class="tag">Development beta</span></div>
         <p id="release-meta">Checking the current APK…</p>
-        <p id="release-warning" class="release-warning" role="status">Only an APK with matching device-verification evidence is published here.</p>
+        <p id="release-warning" class="release-warning" role="status">Checking this APK’s file-verification evidence. Artifact checks do not certify navigation accuracy.</p>
         <button class="button download" id="download-apk" type="button" aria-describedby="download-guidance release-warning" disabled>Checking download…</button>
         <a class="text-link" href="release.json">See exact verification details ↗</a>
         <p class="quiet">APK SHA-256 · Compare this with your downloaded file.</p><code id="apk-hash">Not available yet</code><button class="copy-button" type="button" id="copy-hash" disabled>Copy SHA-256</button><p id="copy-status" role="status"></p>

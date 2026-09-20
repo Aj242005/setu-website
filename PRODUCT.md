@@ -11,6 +11,19 @@ experimental fallback, step-based walking, local export and synthetic demo.
 The agreed 90%-within-10-m GPS-free target is not met. New CPU training is
 research-only. No unsupported accuracy, release-readiness or autonomy claims.
 
+Primary presentation: an interactive, synthetic 3D tunnel journey in a green
+landscape. Show GPS before entry, IMU-only drift in the tunnel, and gradual GPS
+correction after exit, with an inset tracking map. This browser illustration does
+not run the Android filter or model and is not field-accuracy evidence. Keep that
+distinction visible beside the controls. Pause, replay, timeline, sensor comparison,
+cutaway and camera controls must work with keyboard and touch.
+
+The owner-supplied `setu-v0.1.0.apk` replaces the older download. Publish its actual
+signature/alignment/hash inspection, never transfer the old APK's device-test
+results. An artifact-checked preview is not a device-verified navigation release.
+Browser Android hosting needs a separate emulator service; do not fake it with
+screenshots or claim the Three.js scene runs the APK.
+
 Pinned identity: Android's daylight forest-green theme, light default, native
 sans typography, clear hierarchy and user-friendly controls. Primary action:
 download the latest verified beta. Secondary actions: understand the architecture,

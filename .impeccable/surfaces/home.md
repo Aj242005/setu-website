@@ -11,19 +11,20 @@ comparison. The surface seed assigned the field-journal structure; its external
 catalogue was unavailable, so no external challenger/quality board is claimed.
 
 CONTRACT: APK and exact hash visible; beta limitation before download; no invented
-accuracy; real screenshot leads; contribution goes to the existing repository;
+accuracy; synthetic 3D is distinct from the real app; contribution goes to the existing repository;
 keyboard and 360px-wide use work; metadata failures leave download unavailable.
 
 THESIS: More than a GPS dot: offline navigation and inspectable motion data in
 one Android workflow, without selling experimental positioning as proven autonomy.
 OWN-WORLD: SETU's forest ink and daylight paper, native sans and actual Android
-screen capture; no new aesthetic or simulated marketing interface.
-STORY: discover useful workflows, distinguish internet loss from GPS loss,
+screen capture; the code-native 3D landscape is explicitly synthetic, not a mock app.
+STORY: play the illustrative tunnel journey, discover useful workflows, distinguish internet loss from GPS loss,
 follow capture/estimation/evaluation, understand the difference from a route-only
 workflow, inspect evidence, then download and contribute responsibly.
-FIRST VIEWPORT: identify SETU, see its actual app, understand experimental status
-and reach the Android beta action before scrolling through technical evidence.
-FORM: extend the existing field journal, not a replacement visual world. One real
-phone capture, an open utility index, a forest architecture passage, measured
-table and versioned release shelf. Native disclosure controls explain technical
+FIRST VIEWPORT: identify SETU and enter a daylight 3D tunnel diorama with a real
+play control and an inset route map. The illustration label is visible before
+play. The real Android screenshot and APK follow, clearly separate from the scene.
+FORM: extend the existing field journal, not a replacement visual world. A playable
+tunnel diorama, one earlier real phone capture, an open utility index, a forest
+architecture passage, exact-build evidence and versioned release shelf. Native disclosure controls explain technical
 details without requiring JavaScript. Analytics never gates the download.

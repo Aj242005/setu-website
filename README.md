@@ -2,7 +2,8 @@
 
 Static, light-default product and download companion to the Android app. Explains
 implemented utilities, signal-loss limits, the capture/estimation/training
-architecture and measured results. No build dependencies, account database or
+architecture and build-specific evidence. A synthetic 3D tunnel journey leads
+the page. No build dependencies, account database or
 automatic location-data uploads. Website-only Vercel Web Analytics is described
 below; it is not Android telemetry.
 
@@ -10,6 +11,60 @@ From this directory: `python -m http.server 4173 --bind 127.0.0.1`.
 Open `http://127.0.0.1:4173`. This is local hosting, not a public deployment.
 Local hosting serves `downloads` directly. The Vercel deployment serves the site
 and reports from Git and redirects APK downloads to the public GitHub Release.
+For the current supplied preview, local download testing needs a copy of
+`setu-v0.1.0.apk` at `downloads/1dd5fbfd0a83517c.apk`. The APK remains ignored by
+Git and Vercel; the live download uses the hash-pinned GitHub asset instead.
+
+## Interactive tunnel journey
+
+`simulation-model.mjs` generates a deterministic 30-second fictional trip.
+Synthetic GPS is available before second 9, absent from seconds 9–21, and returns
+at second 21. Biased synthetic acceleration and yaw-rate measurements integrate
+speed, heading and position during that gap. Returning fixes correct the current
+estimate gradually; they do not rewrite its past trail. These times, errors and
+uncertainty radii are illustration parameters, not supported APK outage durations.
+
+`tunnel-scene.mjs` uses self-hosted Three.js 0.186.0 (MIT, `vendor/LICENSE`) to draw
+the terrain, curved tunnel and car. It loads only when the stage enters view.
+The sensor model, controls, accessible text and inset SVG map remain usable if
+WebGL or the renderer module is unavailable. There is no visitor GPS request,
+phone-sensor access, CDN dependency or Android/AI inference in this illustration.
+
+- Play/pause, restart or scrub the timeline; phase buttons jump to the key events.
+- Disable **Sensor bridge** to see the position freeze at the last GPS fix.
+- **Reveal tunnel interior** opens the near half of the roof during GPS loss.
+- **Follow car** switches from the overview to a close tracking camera.
+- Motion starts only on request and pauses when hidden/offscreen. Keyboard and
+  reduced-motion users can explore without playback; device pixel ratio is capped.
+
+A real browser Android demo is **not implemented**. A static Vercel deployment
+does not provide a running Android device. That requires a hosted emulator/session
+service and an account, concurrency/cost limits and privacy decisions. Do not label
+the 3D scene or a screenshot as the APK running in the browser.
+
+## Current supplied preview
+
+The owner-supplied `setu-v0.1.0.apk` is the active download, not the earlier QA APK.
+Package `com.setu.navigator`, version `0.1.0` (code 1), 211636530 bytes, SHA-256:
+`1dd5fbfd0a83517c57d7899d218a9b7f2473006e93a0a58602fc76219704b8c2`.
+It is Android-development-signed. Signature, 16 KiB ZIP alignment, package/version,
+file digest and public GitHub download were checked. No fresh device or accuracy
+test is claimed. See `reports/9232934d7944a1bc.md` for the exact inspection.
+
+`release-validation.mjs` is shared by the browser and deployment verifier. An
+explicit `artifact-only` release must have signature/alignment evidence, matching
+hash/bytes, a hash-linked inspection report and **false** installation/device-test
+flags. It cannot carry a `qa` report. The existing `device-tested` path still
+requires matching installed-APK evidence and both hash-verified device reports.
+Unknown levels and mismatches fail closed. Keep old immutable releases/reports
+for history; do not present their evidence as belonging to the new APK.
+
+To publish another supplied preview: inspect that exact APK with the Android SDK
+commands in the report, publish it using the sibling SETU repository's
+`tools.publish_github_apk.publish_asset`, create a new hash-named inspection report
+and matching `artifact-only` metadata, then run `node scripts/verify-release.mjs`.
+Commit/push metadata, report and website code only. Do not change hashes to evade
+a failed check, reuse old evidence, or run an old-artifact watcher over this preview.
 
 ## Deploy to Vercel from GitHub
 
@@ -17,7 +72,8 @@ The original deployment omitted `release.json`, `reports` and `downloads`
 because they were ignored by Git. That caused the disabled download button.
 Metadata and reports must now be committed; APK binaries remain outside Git.
 
-1. Publish the verified APK with the command below, including `--github-release`.
+1. Publish the matching APK to GitHub Releases: use the supplied-preview procedure
+   above, or the device-verified publisher below with `--github-release`.
 2. From this website repository, commit and push `.gitignore`, `.vercelignore`,
    `vercel.json`, `scripts/verify-release.mjs`, `release.json`, `reports` and this
    README. Include any intentional UI changes separately. Never force-add an APK.
