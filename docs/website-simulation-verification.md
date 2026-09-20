@@ -38,6 +38,18 @@ overview intentionally shows the whole journey; Follow car provides the close vi
 
 ## Exact supplied APK
 
+### Tracking-map projection regression
+
+The original inset negated world Z and used unequal axis scales, mirroring and
+stretching the road. It now uses +X to the right and +Z down at a uniform scale.
+All 1803 truth/estimate/last-fix positions across 601 frames matched an independent
+Three.js orthographic camera looking straight down. Browser checks confirmed the
+road/tunnel paths, marker and uncertainty at four phases, stable orientation when
+switching 3D cameras, and identical map geometry with WebGL unavailable. Desktop
+and mobile screenshots were reviewed; the existing interaction checks also passed.
+
+## Exact supplied APK artifact
+
 - Filename: `setu-v0.1.0.apk`; package `com.setu.navigator`; version 0.1.0 / code 1.
 - Bytes: 211636530.
 - SHA-256: `1dd5fbfd0a83517c57d7899d218a9b7f2473006e93a0a58602fc76219704b8c2`.

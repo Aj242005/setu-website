@@ -23,6 +23,10 @@ at second 21. Biased synthetic acceleration and yaw-rate measurements integrate
 speed, heading and position during that gap. Returning fixes correct the current
 estimate gradually; they do not rewrite its past trail. These times, errors and
 uncertainty radii are illustration parameters, not supported APK outage durations.
+The inset is a top-down view of the same world-space track: +X points right and
++Z points down, with the same scale on both axes. Road, tunnel, fixes, estimates
+and uncertainty use that common projection, rather than a mirrored or stretched
+copy. Its orientation stays fixed when the 3D camera changes.
 
 `tunnel-scene.mjs` uses self-hosted Three.js 0.186.0 (MIT, `vendor/LICENSE`) to draw
 the terrain, curved tunnel and car. It loads only when the stage enters view.

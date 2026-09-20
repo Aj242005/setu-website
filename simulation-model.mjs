@@ -2,6 +2,11 @@ export const DURATION = 30;
 export const ENTRY = 9;
 export const EXIT = 21;
 export const STEP = 0.05;
+export const MAP_SCALE = 200 / 124;
+
+export function mapPoint(position) {
+  return [20 + (position.x + 62) * MAP_SCALE, 66 + position.z * MAP_SCALE];
+}
 
 export function roadAt(progress) {
   const phase = progress * Math.PI * 2 - 0.7;

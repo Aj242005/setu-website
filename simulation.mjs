@@ -1,4 +1,4 @@
-import { DURATION, ENTRY, EXIT, STEP, buildSimulation, frameAt } from './simulation-model.mjs';
+import { DURATION, ENTRY, EXIT, STEP, MAP_SCALE, buildSimulation, frameAt, mapPoint } from './simulation-model.mjs';
 
 const stage = document.querySelector('#simulation-stage');
 const play = document.querySelector('#sim-play');
@@ -24,7 +24,6 @@ let scene;
 let sceneRequested = false;
 let lastPhase = '';
 
-function mapPoint(position) { return [20 + (position.x + 62) / 124 * 200, 70 - position.z * 3]; }
 function path(points) {
   let drawing = false;
   return points.map(point => {
@@ -75,7 +74,7 @@ function render() {
   const marker = moveCircle('#mini-position', current);
   marker.setAttribute('fill', frame.gps ? '#195a40' : enabled ? '#2374bc' : '#a56820');
   moveCircle('#mini-last-fix', frame.lastFix).setAttribute('visibility', frame.gps ? 'hidden' : 'visible');
-  moveCircle('#mini-uncertainty', current).setAttribute('r', enabled ? frame.radius * 200 / 124 : 0);
+  moveCircle('#mini-uncertainty', current).setAttribute('r', enabled ? frame.radius * MAP_SCALE : 0);
   for (const button of document.querySelectorAll('[data-time]')) {
     const selected = frame.phase === 'gps' ? button.dataset.time === '3' :
       frame.phase === 'imu' ? button.dataset.time === '15' : button.dataset.time === '22.5';
