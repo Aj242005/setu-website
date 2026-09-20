@@ -1,9 +1,10 @@
-# SETU beta website
+# SETU product website
 
-Audience: Android beta testers, scooter drivers and potential training-data
-contributors. The site explains the current app, offers a verified development
-APK, shows measured limitations, and directs feedback to the existing GitHub
-repository. It does not collect or upload private location data.
+Audience: people discovering SETU, Android users, project evaluators and potential
+training-data contributors. Explain the problem, useful workflows, engineering
+approach and differentiation before offering the verified development APK.
+Marketing must distinguish implemented utilities from experimental positioning.
+Do not assert superiority to competitors without a like-for-like benchmark.
 
 Current truth: offline Delhi/NCR maps, GPS navigation, sensor recording, bounded
 experimental fallback, step-based walking, local export and synthetic demo.
@@ -12,8 +13,13 @@ research-only. No unsupported accuracy, release-readiness or autonomy claims.
 
 Pinned identity: Android's daylight forest-green theme, light default, native
 sans typography, clear hierarchy and user-friendly controls. Primary action:
-download the latest verified beta. Secondary action: join through a GitHub issue
+download the latest verified beta. Secondary actions: understand the architecture,
+inspect measured evidence and explore the source. Feedback goes through GitHub
 without posting raw GPS data. No fabricated signup backend or approval badges.
 
-The parent repository's publisher updates the local site after verified builds.
-Public hosting requires deployment of this directory; no deployment is implied.
+The parent repository's publisher updates local release metadata after verified
+builds. Git pushes trigger Vercel deployments; immutable APKs use GitHub Releases.
+Vercel Web Analytics is for website page views only, not Android telemetry or
+training. No custom events, GPS logs or recording uploads. Strip query strings
+and fragments, respect browser Do Not Track / Global Privacy Control signals,
+and disclose analytics on the page. Dashboard activation remains a deployment step.

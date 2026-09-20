@@ -1,7 +1,7 @@
-# Beta landing page
+# Product landing page
 
-MODE: Persuade. Lead Android testers from product understanding to an informed
-beta download, or to contributing useful recordings without public GPS exposure.
+MODE: Persuade. Help a first-time visitor understand SETU's purpose, useful
+workflows and engineering approach, then make an informed beta-download decision.
 
 WORLD: inherited SETU daylight/forest identity. STRUCTURE: field journal and
 evidence board, with real app capture, recording journey, measured results and
@@ -14,13 +14,16 @@ CONTRACT: APK and exact hash visible; beta limitation before download; no invent
 accuracy; real screenshot leads; contribution goes to the existing repository;
 keyboard and 360px-wide use work; metadata failures leave download unavailable.
 
-THESIS: An honest beta invitation grounded in measured journeys, not a promise
-of perfect GPS-free navigation.
+THESIS: More than a GPS dot: offline navigation and inspectable motion data in
+one Android workflow, without selling experimental positioning as proven autonomy.
 OWN-WORLD: SETU's forest ink and daylight paper, native sans and actual Android
 screen capture; no new aesthetic or simulated marketing interface.
-STORY: understand the app, follow recording and review, examine the evidence,
-download a verified beta, then contribute privately and responsibly.
+STORY: discover useful workflows, distinguish internet loss from GPS loss,
+follow capture/estimation/evaluation, understand the difference from a route-only
+workflow, inspect evidence, then download and contribute responsibly.
 FIRST VIEWPORT: identify SETU, see its actual app, understand experimental status
 and reach the Android beta action before scrolling through technical evidence.
-FORM: editorial field journal, one real phone capture, measured table, versioned
-release shelf and an explicit invitation through the existing GitHub project.
+FORM: extend the existing field journal, not a replacement visual world. One real
+phone capture, an open utility index, a forest architecture passage, measured
+table and versioned release shelf. Native disclosure controls explain technical
+details without requiring JavaScript. Analytics never gates the download.

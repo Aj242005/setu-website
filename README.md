@@ -1,7 +1,10 @@
-# SETU beta site
+# SETU product site
 
-Static, light-default companion to the Android app. No build dependencies,
-tracking scripts, account database or automatic location-data uploads.
+Static, light-default product and download companion to the Android app. Explains
+implemented utilities, signal-loss limits, the capture/estimation/training
+architecture and measured results. No build dependencies, account database or
+automatic location-data uploads. Website-only Vercel Web Analytics is described
+below; it is not Android telemetry.
 
 From this directory: `python -m http.server 4173 --bind 127.0.0.1`.
 Open `http://127.0.0.1:4173`. This is local hosting, not a public deployment.
@@ -22,6 +25,39 @@ Metadata and reports must now be committed; APK binaries remain outside Git.
    command `node scripts/verify-release.mjs`, output directory `.`, and no install
    command. `vercel.json` supplies these settings; remove conflicting dashboard
    overrides. Redeploy the new commit, not the preceding failed commit.
+
+## Enable website analytics
+
+`analytics.js` uses Vercel's static-site queue and production script at
+`/_vercel/insights/script.js`; no React integration, package install or API key is
+needed. Keep it separate from `app.js` so a blocked analytics script never blocks
+release verification or APK downloads.
+
+1. In the Vercel project dashboard, open **Analytics** and choose **Enable**.
+2. Commit/push the intended website changes and redeploy. Activation creates the
+   analytics routes on the next deployment. `vercel.json` configures the build,
+   security/cache headers and APK redirect; it does **not** enable the dashboard
+   product or send measurements by itself.
+3. Visit the deployed HTTPS site without an analytics blocker or browser privacy
+   opt-out. Confirm the script returns 200 and a page-view request is sent; Vercel
+   may use a generated endpoint path. Check the Analytics dashboard for visits.
+   A local Python server is not an analytics deployment and does not load it.
+4. Also check with Do Not Track or Global Privacy Control enabled: no analytics
+   script should load, and APK download verification should still work.
+
+Only page views are allowed; no custom click/download events are emitted (custom
+events also depend on the Vercel plan). Query strings and fragments are removed
+from event URLs before sending. Invalid URLs/events are dropped. Browser DNT/GPC
+signals suppress loading; HTTPS localhost is excluded as well. The website
+discloses analytics at `#privacy`, does not use analytics cookies, does not request
+location and does not send trip files, sensor data or device identifiers from
+Android. Vercel still processes request-derived visit information; this is not a
+claim of zero data collection. The owner must review applicable privacy duties.
+
+Official references: [static-site setup](https://vercel.com/docs/analytics/quickstart?framework=other),
+[beforeSend](https://vercel.com/docs/analytics/package#beforesend),
+[redacting URLs](https://vercel.com/docs/analytics/redacting-sensitive-data), and
+[privacy](https://vercel.com/docs/analytics/privacy-policy).
 
 ### Preserve report checksums across Windows and Linux
 
