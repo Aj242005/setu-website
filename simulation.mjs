@@ -173,9 +173,6 @@ async function loadScene() {
       document.querySelector('#scene-canvas').hidden = !available;
       cutawayToggle.disabled = !available; cameraButton.disabled = !available;
       for (const button of document.querySelectorAll('button[data-zoom]')) button.disabled = !available;
-      document.querySelector('.arrival-caption').textContent = available
-        ? 'Interactive 3D reconstruction. Photo-referenced; not a surveyed digital twin.'
-        : '3D graphics paused. Reference photograph of Atal Tunnel’s south portal.';
       signal.hidden = !available; loading.hidden = available;
       loading.textContent = '3D graphics paused. The map and controls still work.';
     });
@@ -183,14 +180,11 @@ async function loadScene() {
     scene.setCutaway(cutawayToggle.checked);
     scene.setFollow(cameraButton.getAttribute('aria-pressed') === 'true');
     scene.setZoom(viewZoom);
-    scene.setArrival(document.documentElement.classList.contains('arrival-active'));
-    document.querySelector('.arrival-caption').textContent = 'Interactive 3D reconstruction. Photo-referenced; not a surveyed digital twin.';
     render();
   } catch {
     stage.dataset.renderer = 'unavailable';
     cutawayToggle.disabled = true; cameraButton.disabled = true;
     for (const button of document.querySelectorAll('button[data-zoom]')) button.disabled = true;
-    document.querySelector('.arrival-caption').textContent = '3D is unavailable. Showing the reference photograph of Atal Tunnel’s south portal.';
     loading.textContent = '3D is unavailable. The tracking map and controls still work.';
   }
 }
@@ -202,24 +196,15 @@ const visibility = new IntersectionObserver(entries => {
 visibility.observe(document.querySelector('.simulation-layout'));
 const sceneVisibility = new IntersectionObserver(entries => {
   stageVisible = entries[0].isIntersecting;
-  if (stageVisible) render();
+  if (stageVisible && !document.documentElement.classList.contains('arrival-active')) render();
 });
 sceneVisibility.observe(stage);
 const arrival = document.querySelector('#arrival');
 if (arrival && !arrival.hidden) loadScene();
 window.addEventListener('setu-arrival-start', loadScene);
-window.addEventListener('setu-arrival-complete', () => {
-  const world = document.querySelector('#arrival-world');
-  if (scene && stage.dataset.renderer === 'webgl') {
-    try {
-      const snapshot = new Image(); snapshot.src = scene.snapshot();
-      snapshot.alt = 'Rendered view of the photo-referenced Atal Tunnel reconstruction.';
-      world.append(snapshot);
-    } catch { document.querySelector('.arrival-caption').textContent = 'Reference photograph of Atal Tunnel’s south portal.'; }
-  }
-  stage.prepend(document.querySelector('#scene-canvas'));
-  scene?.setArrival(false);
+window.addEventListener('setu-arrival-complete', event => {
   render();
+  if (event.detail?.autoplay && !document.hidden && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !playing) play.click();
 });
 play.disabled = false; restart.disabled = false; timeline.disabled = false;
 render();

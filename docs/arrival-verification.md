@@ -1,5 +1,9 @@
 # India arrival and tunnel presentation verification
 
+Historical checkpoint: the scroll-driven opening and photograph fallback below
+are superseded by the [automatic opening verification](automatic-arrival-verification.md).
+The geographic data, sensor panel and model remain unchanged.
+
 Checked on 21 September 2026 in a separate, temporary-profile Headless Edge
 browser using WebGL2/SwiftShader. This is website verification, **not new Android
 device testing, model training or positioning-accuracy evidence**.

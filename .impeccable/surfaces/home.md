@@ -18,17 +18,21 @@ THESIS: More than a GPS dot: offline navigation and inspectable motion data in
 one Android workflow, without selling experimental positioning as proven autonomy.
 OWN-WORLD: SETU's forest ink and daylight paper, native sans and actual Android
 screen capture; the code-native 3D landscape is explicitly synthetic, not a mock app.
-STORY: fly from India to the approved Atal Tunnel south portal, scroll through
-mist into the photo-referenced landscape, play the illustrative tunnel journey,
+STORY: pause on the complete map of India, fly to the approved Atal Tunnel south
+portal, automatically pass through clouds into the illustrative tunnel journey,
 discover useful workflows, distinguish internet loss from GPS loss,
 follow capture/estimation/evaluation, understand the difference from a route-only
 workflow, inspect evidence, then download and contribute responsibly.
-FIRST VIEWPORT: the map of India fills the viewport, with SETU and a skip control
-above it, a mapped portal pin and coordinates below. Its automatic 4.8-second
-fly-in ends in cloud cover; scroll clears it into the south-portal reconstruction.
-The larger interactive board follows with 1×–4× zoom, 1×–3× speed, manual play and
+FIRST VIEWPORT: the map of India sits clear of copy, with SETU and a skip control
+above it, a mapped portal pin and coordinates below. Hold the decoded map for
+1.5 seconds, zoom for 2.4 seconds, then automatically scroll under full-screen
+white clouds and reveal the demo. The ~5.1-second sequence needs no user scrolling
+and leaves no separate photographic hero or empty spacer behind.
+The larger interactive board follows with 1×–4× zoom, 1×–3× speed, play/pause and
 the same non-mirrored top-down map. Reconstruction and synthetic-sensor labels
-stay visible. Reduced-motion and deep-link users go directly to the page.
+stay visible. The demo plays once after the automatic handoff. Reduced-motion,
+deep-link and Skip users retain manual playback; deliberate navigation interrupts
+the opening instead of being pulled back to it.
 The real Android screenshot and APK follow, clearly separate from the scene.
 The opening uses India's full official territorial depiction from open-licensed
 sources. A right-hand dummy sensor panel makes the mechanism inspectable: GPS

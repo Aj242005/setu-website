@@ -17,23 +17,31 @@ Git and Vercel; the live download uses the hash-pinned GitHub asset instead.
 
 ## Interactive tunnel journey
 
-Fresh root visits and reloads start a skippable India-to-Atal-Tunnel fly-in.
-`arrival.mjs` projects the actual OSM south-endpoint coordinates into the
-self-hosted country map; scrolling clears a full-screen procedural cloud layer
-to reveal the landscape. `#simulation` and `#download` links, reduced-motion
-preferences and no-JavaScript visits bypass the opening. One WebGL canvas moves
-from the introduction into the interactive board; the introduction retains a
-still image rather than running a second renderer.
+Fresh root visits and reloads start a skippable, fully automatic opening.
+`arrival.mjs` waits for the self-hosted India image to decode, holds the complete
+map for 1.5 seconds, then zooms to the actual OSM south-endpoint coordinates over
+2.4 seconds. Full-screen white clouds cover a 350ms automatic scroll to the demo;
+an 850ms dissolve reveals it and starts one illustrative journey. No scrolling,
+second click, photographic hero or separate portal reveal is required.
+`#simulation` and `#download` links, reduced-motion preferences and no-JavaScript
+visits bypass the opening. Skip/Escape reaches the paused demo; manual scrolling,
+keyboard navigation or a changed section link cancels the sequence. Hidden tabs
+pause the opening clock. A missing map skips it rather than blocking the page.
+The only WebGL canvas stays in the demo; no renderer reparenting or snapshot is needed.
+
+The opening caps each visual step at 100ms, so a slow GPU cannot skip the zoom or
+reveal. Its nominal 5.1-second sequence can take longer on a busy device; this does
+not change the sensor journey's elapsed-time playback or its speed controls.
 
 `landscape.mjs` builds photo-referenced portal geometry, terrain, ridges, rocks
 and instanced vegetation using local licensed assets. This is not a surveyed
 digital twin or a full-length reconstruction of the 9.02 km tunnel. See
 [`docs/landscape-sources.md`](docs/landscape-sources.md) for coordinates, photo
 attributions, texture sources and the distinction between real geography and
-the compressed fictional sensor trip. If 3D is unavailable, the opening uses
-the attributed reference photograph and the board retains its 2D simulation.
+the compressed fictional sensor trip. If 3D is unavailable, the opening still
+completes on time and the board retains its 2D simulation, without a photo fallback.
 The browser test matrix and limitations are recorded in
-[`docs/arrival-verification.md`](docs/arrival-verification.md).
+[`docs/automatic-arrival-verification.md`](docs/automatic-arrival-verification.md).
 
 The India outline follows the official Indian territorial depiction using
 DataMeet's open-licensed country composite, with OSM-derived Lakshadweep

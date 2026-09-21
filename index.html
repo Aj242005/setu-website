@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="simulation.css">
   <link rel="stylesheet" href="arrival.css">
+  <link rel="preload" href="assets/india-region.svg" as="image">
   <script type="module" src="app.js"></script>
   <script src="analytics.js" defer></script>
   <script type="module" src="arrival.mjs"></script>
@@ -21,16 +22,12 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <section class="arrival" id="arrival" aria-label="India to Atal Tunnel opening" hidden>
-    <div class="arrival-sticky">
-      <div class="arrival-world" id="arrival-world"></div>
       <div class="arrival-map"><svg id="arrival-map" viewBox="0 0 900 900" role="img" aria-label="Flying from a map of India to the south entrance of Atal Tunnel, Himachal Pradesh."><image href="assets/india-region.svg" width="900" height="900"/><g id="arrival-marker"><circle data-radius="15" r="15" fill="#fcfdf9" fill-opacity="0.85"/><circle data-radius="7" r="7" fill="#195a40"/></g></svg></div>
       <canvas id="arrival-clouds" class="arrival-clouds" aria-hidden="true"></canvas>
       <div class="arrival-header"><a class="brand" href="#simulation"><img src="assets/mark.svg" alt="" width="40" height="40">SETU</a><button class="arrival-skip" id="arrival-skip" type="button">Skip introduction ↓</button></div>
-      <div class="arrival-copy"><p class="kicker">India. Himachal Pradesh. Beyond the signal.</p><h2>Into the<br>mountains.</h2><p>Follow the map to Atal Tunnel. Then step through the mist and see what happens when the signal disappears.</p></div>
-      <p class="arrival-caption">Preparing 3D. Reference photograph shown while the landscape loads.</p>
-      <div class="arrival-location"><div class="arrival-place"><strong>Atal Tunnel · South portal</strong><span>32.36323° N, 77.13311° E · Himachal Pradesh</span><p id="arrival-status" role="status">Locating the tunnel on the map of India…</p></div><button id="arrival-continue" type="button" class="arrival-scroll">Scroll into the valley ↓</button></div>
+      <div class="arrival-copy"><p class="kicker">A journey beyond the signal</p><h2>GPS fades.<br>Sensors take over.</h2><p>See the idea in motion. From India to an illustrative sensor-powered journey.</p></div>
+      <div class="arrival-location"><div class="arrival-place"><strong>Atal Tunnel · South portal</strong><span>32.36323° N, 77.13311° E · Himachal Pradesh</span><p id="arrival-status" role="status">India → Atal Tunnel → interactive demo. Sit back; no scrolling needed.</p></div></div>
       <p class="arrival-credit">India: DataMeet · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · <a href="docs/landscape-sources.md">Map &amp; scene sources</a></p>
-    </div>
   </section>
   <header class="header wrap">
     <a class="brand" href="#" aria-label="SETU home"><img src="assets/mark.svg" width="43" height="43" alt=""><span>SETU</span></a>

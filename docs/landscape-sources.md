@@ -57,8 +57,9 @@ The south entrance's sloped timber fascia, lettering, stone-like pillars, concre
 retaining structures and forested slope are modelled from:
 
 - [Atal Tunnel Entrance (South Portal), Manali](https://commons.wikimedia.org/wiki/File:Atal_Tunnel_Entrance_(South_Portal),_Manali.jpg),
-  Tanvi.sharmaaa, **CC BY-SA 4.0**. The site's reference/fallback WebP is a resized,
+  Tanvi.sharmaaa, **CC BY-SA 4.0**. The retained reference WebP is a resized,
   recompressed copy, under the same [CC BY-SA 4.0 licence](https://creativecommons.org/licenses/by-sa/4.0/).
+  It is no longer displayed as the opening hero or a rendering fallback.
 - [Atal Tunnel vrtmrgmpksk (2)](https://commons.wikimedia.org/wiki/File:Atal_Tunnel_vrtmrgmpksk_(2).jpg),
   Vinayaraj, CC BY-SA 4.0. Interior lighting, wall lining and lane-divider reference;
   this photograph is not included in the website's assets.

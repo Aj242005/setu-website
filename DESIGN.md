@@ -5,8 +5,8 @@ Extend the Android visual system, not a new brand. Background #F4F6F2, paper
 rules #D9E1D4. System sans, 16–18px body, display up to 88px. All text remains
 selectable; narrow columns for reading, generous chapter spacing.
 
-An evidence-first field journal: open with an India-to-Atal-Tunnel fly-in and
-scroll-cleared mist, then the explicitly illustrative 3D tunnel journey,
+An evidence-first field journal: open with a legible India map, an automatic
+Atal-Tunnel fly-in and cloud transition into the explicitly illustrative 3D journey,
 the app and one real screenshot,
 explain the collection journey, show evidence for the exact current APK, then make the beta
 download and responsible contribution steps concrete. No unlabelled synthetic maps, charts,
@@ -22,9 +22,13 @@ A right-hand instrument panel keeps GPS coordinates, sample time and six phone
 sensor axes visible beside the board on wide screens. Use tabular figures,
 explicit units and mounting axes; no animated charts or extra sensor widgets.
 It stacks beneath the controls on narrow screens, never over the car/map.
-The opening's 4.8-second map fly-in is the only automatic motion, with a persistent
-skip control and scroll-controlled reveal. Reduced-motion and section deep links
-bypass it. The sensor journey starts only on request, supports 1×–3× speed, and
+The opening is a temporary fixed overlay, not a scroll chapter or photographic
+hero. Keep the whole India map clear of text for 1.5 seconds; zoom for 2.4 seconds,
+cover the automatic scroll in white clouds, then dissolve into the demo. No scroll
+prompt or waiting/loading state at the end. Skip remains available throughout.
+Reduced-motion and section deep links bypass it; manual navigation interrupts it.
+The sensor journey plays once after the automatic handoff, otherwise starts only
+on request. It supports 1×–3× speed, and
 pauses when hidden/offscreen; its timeline also works without animation.
 The complete tunnel is visible before entry; its interior can open during the
 outage and stay open through recovery. Artifact-only previews show file checks and pending device validation,

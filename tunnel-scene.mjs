@@ -148,17 +148,13 @@ export async function createScene(container, frames, signalPosition, availabilit
     birds.push(bird); scene.add(bird);
   }
 
-  let current = frames[0], cutaway = true, follow = false, zoom = 1, arrival = false, lost = false;
+  let current = frames[0], cutaway = true, follow = false, zoom = 1, lost = false;
   const anchor = new THREE.Vector3();
   function render() {
     if (lost || !container.clientWidth || !container.clientHeight) return;
     const width = container.clientWidth, height = container.clientHeight;
-    camera.aspect = width / height; camera.zoom = arrival ? 1 : zoom; camera.updateProjectionMatrix();
-    const start = roadAt(tunnelStart);
-    if (arrival) {
-      camera.position.set(start.x - (camera.aspect < 0.9 ? 60 : 44), 5.8, start.z + 3);
-      camera.lookAt(start.x + 5, 7.8, start.z);
-    } else if (follow) {
+    camera.aspect = width / height; camera.zoom = zoom; camera.updateProjectionMatrix();
+    if (follow) {
       const distance = Math.max(1, 1.2 / camera.aspect);
       camera.position.set(current.truth.x - 19 * distance, 1.2 + 8 * distance, current.truth.z + 9.5 * distance);
       camera.lookAt(current.truth.x + (zoom > 1 ? 0 : 4), 1.2, current.truth.z);
@@ -173,7 +169,7 @@ export async function createScene(container, frames, signalPosition, availabilit
     signalPosition((anchor.x * 0.5 + 0.5) * width, (-anchor.y * 0.5 + 0.5) * height);
   }
   function reveal() {
-    const enabled = cutaway && current.time >= ENTRY && !arrival;
+    const enabled = cutaway && current.time >= ENTRY;
     fullRoof.visible = !enabled; cutRoof.visible = enabled; nearWalls.visible = !enabled;
     fixtures.visible = !enabled;
     entryPortal.visible = !enabled; exitPortal.visible = !enabled;
@@ -189,12 +185,12 @@ export async function createScene(container, frames, signalPosition, availabilit
       current = frame; reveal();
       car.position.set(frame.truth.x, 0.1, frame.truth.z); car.rotation.y = -frame.truth.heading;
       for (const wheel of wheels) wheel.rotation.z = -frame.time * 7;
-      beacon.visible = frame.gps !== null && !arrival;
+      beacon.visible = frame.gps !== null;
       const position = enabled ? frame.estimate : frame.lastFix;
-      marker.position.set(position.x, 0.4, position.z); marker.visible = !arrival;
+      marker.position.set(position.x, 0.4, position.z);
       marker.material.color.set(frame.gps ? '#195a40' : enabled ? '#2374bc' : '#a56820');
       uncertainty.position.set(position.x, 0.09, position.z); uncertainty.scale.setScalar(frame.radius);
-      uncertainty.visible = enabled && frame.time >= ENTRY && !arrival; trail.visible = enabled && !arrival;
+      uncertainty.visible = enabled && frame.time >= ENTRY; trail.visible = enabled;
       const start = Math.round(ENTRY / STEP);
       trail.geometry.setDrawRange(start * 6, Math.max(0, Math.round(frame.time / STEP) - start) * 6);
       birds.forEach((bird, index) => {
@@ -205,11 +201,9 @@ export async function createScene(container, frames, signalPosition, availabilit
       });
       render();
     },
-    setCutaway(value) { cutaway = value; reveal(); render(); },
-    setFollow(value) { follow = value; render(); },
-    setZoom(value) { zoom = Math.min(4, Math.max(1, value)); render(); },
-    setArrival(value) { arrival = value; reveal(); render(); },
-    snapshot() { render(); return renderer.domElement.toDataURL('image/webp', 0.85); },
+    setCutaway(value) { if (cutaway === value) return; cutaway = value; reveal(); render(); },
+    setFollow(value) { if (follow === value) return; follow = value; render(); },
+    setZoom(value) { const next = Math.min(4, Math.max(1, value)); if (zoom === next) return; zoom = next; render(); },
   };
 }
 

@@ -8,71 +8,83 @@ export function projectIndia(longitude, latitude) {
 
 const arrival = document.querySelector('#arrival');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const skipArrival = Boolean(location.hash && location.hash !== '#top') || reducedMotion.matches;
-if (arrival && !skipArrival) startArrival();
+const skipArrival = () => Boolean(location.hash && location.hash !== '#top') || reducedMotion.matches;
+if (arrival && !skipArrival()) startArrival();
 
-function startArrival() {
+async function startArrival() {
   history.scrollRestoration = 'manual';
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  const world = document.querySelector('#arrival-world');
-  const canvasContainer = document.querySelector('#scene-canvas');
+  const mapImage = new Image();
+  mapImage.src = 'assets/india-region.svg';
+  let timeout;
+  try {
+    await Promise.race([mapImage.decode(), new Promise((resolve, reject) => {
+      timeout = setTimeout(() => reject(new Error('Map unavailable')), 3000);
+    })]);
+  } catch { return; }
+  finally { clearTimeout(timeout); }
+  if (skipArrival() || scrollY > 20) return;
   const map = document.querySelector('#arrival-map');
   const mapLayer = document.querySelector('.arrival-map');
   const marker = document.querySelector('#arrival-marker');
   const copy = document.querySelector('.arrival-copy');
-  const caption = document.querySelector('.arrival-caption');
+  const location = document.querySelector('.arrival-location');
   const status = document.querySelector('#arrival-status');
   const clouds = document.querySelector('#arrival-clouds');
   const context = clouds.getContext('2d');
   const [targetX, targetY] = projectIndia(PORTAL.longitude, PORTAL.latitude);
-  const texture = cloudTexture();
+  const texture = context ? cloudTexture() : null;
+  const listeners = new AbortController();
   let elapsed = 0;
   let lastTick = 0;
   let frame = 0;
   let finished = false;
-  let cover = 0;
-  let progress = 0;
   let width = 0;
   let height = 0;
   arrival.hidden = false;
   document.documentElement.classList.add('arrival-active');
-  world.append(canvasContainer);
   marker.setAttribute('transform', `translate(${targetX} ${targetY})`);
   window.dispatchEvent(new Event('setu-arrival-start'));
 
   function ease(value) { const bounded = Math.min(1, Math.max(0, value)); return bounded * bounded * (3 - 2 * bounded); }
+  function demoTop() { return Math.max(0, document.querySelector('#simulation-stage').getBoundingClientRect().top + scrollY - 24); }
   function paint() {
-    const advance = ease((progress - 0.14) / 0.68);
+    const flight = Math.min(1, Math.max(0, (elapsed - 1500) / 2400));
+    const advance = ease(flight);
     const scale = Math.exp(advance * Math.log(65));
     const viewSize = 900 / scale;
     const centerX = targetX + (450 - targetX) * (1 - advance) / scale;
     const centerY = targetY + (450 - targetY) * (1 - advance) / scale;
     map.setAttribute('viewBox', `${centerX - viewSize / 2} ${centerY - viewSize / 2} ${viewSize} ${viewSize}`);
     for (const circle of marker.querySelectorAll('circle')) circle.setAttribute('r', Number(circle.dataset.radius) / scale);
-    const scroll = Math.min(1, Math.max(0, -arrival.getBoundingClientRect().top / (arrival.offsetHeight - innerHeight)));
-    const reveal = ease((scroll - 0.06) / 0.78);
-    cover = ease((progress - 0.38) / 0.5) * (1 - reveal);
-    mapLayer.style.opacity = String(1 - ease((scroll - 0.005) / 0.1));
-    copy.style.opacity = String(1 - ease((progress - 0.12) / 0.3));
-    caption.style.opacity = String(reveal);
-    if (reveal > 0.9) {
-      status.textContent = 'The south portal. Continue to the interactive journey.';
-      document.querySelector('#arrival-continue').textContent = 'Explore the journey ↓';
-    }
+    const cover = ease((flight - 0.42) / 0.5);
+    const reveal = ease((elapsed - 4250) / 850);
+    copy.style.opacity = String(1 - ease(flight / 0.4));
+    location.style.opacity = String(1 - ease((flight - 0.6) / 0.4));
+    mapLayer.style.opacity = elapsed >= 3900 ? '0' : '1';
+    arrival.style.opacity = String(1 - reveal);
+    if (elapsed >= 3900) window.scrollTo({ top: demoTop() * ease((elapsed - 3900) / 350), behavior: 'instant' });
     if (context) {
       context.clearRect(0, 0, width, height);
       context.globalAlpha = cover;
-      context.fillStyle = '#edf2f1';
+      context.fillStyle = '#f7f9f8';
       context.fillRect(0, 0, width, height);
-      context.globalAlpha = cover * 0.72;
-      context.drawImage(texture, -width * (0.12 + progress * 0.06), -height * 0.15, width * 1.4, height * 1.4);
-      context.globalAlpha = cover * 0.32;
-      context.drawImage(texture, -width * 0.45 + width * progress * 0.3, height * 0.04, width * 1.8, height * 1.2);
+      context.globalAlpha = cover * 0.35;
+      context.drawImage(texture, -width * (0.12 + flight * 0.06), -height * 0.15, width * 1.4, height * 1.4);
+      context.globalAlpha = cover * 0.18;
+      context.drawImage(texture, -width * 0.45 + width * flight * 0.3, height * 0.04, width * 1.8, height * 1.2);
       context.globalAlpha = 1;
+    } else clouds.style.background = `rgba(247,249,248,${cover})`;
+    const phase = elapsed < 1500 ? 'map' : elapsed < 3900 ? 'flight' : elapsed < 4250 ? 'transfer' : 'reveal';
+    if (arrival.dataset.phase !== phase) {
+      status.textContent = phase === 'map' ? 'India → Atal Tunnel → interactive demo. Sit back; no scrolling needed.' :
+        phase === 'flight' ? 'Flying to the south portal. The demo follows automatically.' : 'Opening the interactive sensor demo.';
     }
-    arrival.dataset.flight = progress.toFixed(3);
+    arrival.dataset.phase = phase;
+    arrival.dataset.elapsed = elapsed.toFixed(0);
+    arrival.dataset.flight = flight.toFixed(3);
+    arrival.dataset.cover = cover.toFixed(3);
     arrival.dataset.reveal = reveal.toFixed(3);
-    if (scroll >= 0.98) complete();
   }
   function resize() {
     width = clouds.width = Math.round(innerWidth * Math.min(devicePixelRatio, 1.25));
@@ -81,49 +93,44 @@ function startArrival() {
   }
   function tick(timestamp) {
     if (finished || document.hidden) return;
-    if (lastTick) elapsed += timestamp - lastTick;
+    if (lastTick) elapsed += Math.min(timestamp - lastTick, 100);
     lastTick = timestamp;
-    progress = Math.min(1, elapsed / 4800);
     paint();
-    if (progress < 1) frame = requestAnimationFrame(tick);
-    else status.textContent = 'Scroll to clear the mist and enter the valley.';
+    if (elapsed < 5100) frame = requestAnimationFrame(tick);
+    else complete(true, true);
   }
-  function complete() {
+  function complete(scrollToDemo = false, autoplay = false) {
     if (finished) return;
     finished = true;
     cancelAnimationFrame(frame);
-    window.dispatchEvent(new Event('setu-arrival-complete'));
+    listeners.abort();
+    const focusInside = arrival.contains(document.activeElement);
+    arrival.hidden = true;
+    arrival.dataset.phase = 'complete';
     document.documentElement.classList.remove('arrival-active');
-    mapLayer.hidden = true; clouds.hidden = true; copy.hidden = true;
-    caption.style.opacity = '1';
-    status.textContent = 'Continue to the interactive journey.';
-    window.removeEventListener('scroll', scroll);
-    window.removeEventListener('resize', resize);
-  }
-  function scroll() {
-    if (finished) return;
-    if (scrollY > 20 && progress < 1) { progress = 1; cancelAnimationFrame(frame); }
-    status.textContent = 'Scroll to clear the mist and enter the valley.';
-    paint();
+    if (scrollToDemo) window.scrollTo({ top: demoTop(), behavior: 'instant' });
+    if (focusInside) document.querySelector('#sim-play').focus({ preventScroll: true });
+    window.dispatchEvent(new CustomEvent('setu-arrival-complete', { detail: { autoplay } }));
   }
   document.querySelector('#arrival-skip').addEventListener('click', () => {
-    complete(); arrival.hidden = true;
-    document.querySelector('#simulation').scrollIntoView({ behavior: 'instant' });
-    document.querySelector('#sim-play').focus({ preventScroll: true });
-  });
-  document.querySelector('#arrival-continue').addEventListener('click', () => {
-    if (finished || Number(arrival.dataset.reveal) > 0.9) {
-      complete(); document.querySelector('#simulation').scrollIntoView({ behavior: 'smooth' });
-    }
-    else { progress = 1; cancelAnimationFrame(frame); window.scrollTo({ top: arrival.offsetTop + innerHeight * 0.85, behavior: 'smooth' }); }
-  });
+    complete(true); document.querySelector('#sim-play').focus({ preventScroll: true });
+  }, { signal: listeners.signal });
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { complete(true); document.querySelector('#sim-play').focus({ preventScroll: true }); }
+    else if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) complete();
+  }, { signal: listeners.signal });
+  window.addEventListener('wheel', () => complete(), { passive: true, signal: listeners.signal });
+  window.addEventListener('touchmove', () => complete(), { passive: true, signal: listeners.signal });
+  window.addEventListener('hashchange', () => complete(), { signal: listeners.signal });
+  document.addEventListener('focusin', event => {
+    if (!arrival.contains(event.target)) complete();
+  }, { signal: listeners.signal });
   document.addEventListener('visibilitychange', () => {
     cancelAnimationFrame(frame); lastTick = 0;
-    if (!document.hidden && !finished && progress < 1) frame = requestAnimationFrame(tick);
-  });
-  reducedMotion.addEventListener('change', event => { if (event.matches) { complete(); arrival.hidden = true; } });
-  window.addEventListener('scroll', scroll, { passive: true });
-  window.addEventListener('resize', resize);
+    if (!document.hidden && !finished) frame = requestAnimationFrame(tick);
+  }, { signal: listeners.signal });
+  reducedMotion.addEventListener('change', event => { if (event.matches) complete(); }, { signal: listeners.signal });
+  window.addEventListener('resize', resize, { signal: listeners.signal });
   resize(); frame = requestAnimationFrame(tick);
 }
 
