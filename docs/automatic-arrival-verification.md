@@ -61,3 +61,14 @@ Redundant initial renderer settings no longer trigger identical redraws.
 The assertion harnesses and captured PNG/frame traces are kept in the local
 `%LOCALAPPDATA%/SETU/website-tunnel` verification workspace. No browser automation
 framework or build dependency was added to the static website.
+
+## Live deployment
+
+Implementation `a223a3e` was pushed to GitHub and verified on the production
+Vercel URL on 21 September 2026. Deployed HTML, animation, renderer and map files
+match the checked sources. The entire hands-free, reload, responsive, reduced-motion,
+missing-asset and no-JavaScript matrix passes live, as do landscape, touch Skip
+and real background-tab suspension. No portal-photo request or uncaught exception
+was observed. The exact existing APK remains enabled and reachable at 211,636,530
+bytes; its SHA-256 remains
+`1dd5fbfd0a83517c57d7899d218a9b7f2473006e93a0a58602fc76219704b8c2`.
