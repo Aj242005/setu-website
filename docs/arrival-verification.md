@@ -92,3 +92,17 @@ route is not the real 9.02 km tunnel journey. See [sources](landscape-sources.md
 The existing full-download verification belongs to the supplied preview's
 artifact report. This website-only change does not claim a fresh 211 MB download
 hash check or transfer another APK's phone-test results to this one.
+
+## Live deployment
+
+The implementation in `05f33a5` was verified on the public Vercel website on
+21 September 2026. The deployed modules, styles and country SVG matched the
+local committed implementation. The opening/zoom/speed checks, six-axis panel,
+mobile feed continuity, eight boundary-coverage samples and all 1,803 tracking-map
+projection comparisons also passed against the deployed URL.
+
+The live download button selected the expected artifact and filename. Its
+redirected public HEAD response reported **211636530 bytes**; release metadata
+retained the original SHA-256. No browser runtime exceptions were recorded in
+these successful live checks. The scene remains photo-referenced and illustrative,
+not a claim of photorealistic scanning or verified Android navigation accuracy.
