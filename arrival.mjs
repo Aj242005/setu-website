@@ -35,6 +35,9 @@ async function startArrival() {
   const [targetX, targetY] = projectIndia(PORTAL.longitude, PORTAL.latitude);
   const texture = context ? cloudTexture() : null;
   const listeners = new AbortController();
+  const hold = 1000;
+  const flightEnd = hold + 2400;
+  const revealStart = flightEnd + 350;
   let elapsed = 0;
   let lastTick = 0;
   let frame = 0;
@@ -49,7 +52,7 @@ async function startArrival() {
   function ease(value) { const bounded = Math.min(1, Math.max(0, value)); return bounded * bounded * (3 - 2 * bounded); }
   function demoTop() { return Math.max(0, document.querySelector('#simulation-stage').getBoundingClientRect().top + scrollY - 24); }
   function paint() {
-    const flight = Math.min(1, Math.max(0, (elapsed - 1500) / 2400));
+    const flight = Math.min(1, Math.max(0, (elapsed - hold) / 2400));
     const advance = ease(flight);
     const scale = Math.exp(advance * Math.log(65));
     const viewSize = 900 / scale;
@@ -58,12 +61,12 @@ async function startArrival() {
     map.setAttribute('viewBox', `${centerX - viewSize / 2} ${centerY - viewSize / 2} ${viewSize} ${viewSize}`);
     for (const circle of marker.querySelectorAll('circle')) circle.setAttribute('r', Number(circle.dataset.radius) / scale);
     const cover = ease((flight - 0.42) / 0.5);
-    const reveal = ease((elapsed - 4250) / 850);
+    const reveal = ease((elapsed - revealStart) / 850);
     copy.style.opacity = String(1 - ease(flight / 0.4));
     location.style.opacity = String(1 - ease((flight - 0.6) / 0.4));
-    mapLayer.style.opacity = elapsed >= 3900 ? '0' : '1';
+    mapLayer.style.opacity = elapsed >= flightEnd ? '0' : '1';
     arrival.style.opacity = String(1 - reveal);
-    if (elapsed >= 3900) window.scrollTo({ top: demoTop() * ease((elapsed - 3900) / 350), behavior: 'instant' });
+    if (elapsed >= flightEnd) window.scrollTo({ top: demoTop() * ease((elapsed - flightEnd) / 350), behavior: 'instant' });
     if (context) {
       context.clearRect(0, 0, width, height);
       context.globalAlpha = cover;
@@ -75,7 +78,7 @@ async function startArrival() {
       context.drawImage(texture, -width * 0.45 + width * flight * 0.3, height * 0.04, width * 1.8, height * 1.2);
       context.globalAlpha = 1;
     } else clouds.style.background = `rgba(247,249,248,${cover})`;
-    const phase = elapsed < 1500 ? 'map' : elapsed < 3900 ? 'flight' : elapsed < 4250 ? 'transfer' : 'reveal';
+    const phase = elapsed < hold ? 'map' : elapsed < flightEnd ? 'flight' : elapsed < revealStart ? 'transfer' : 'reveal';
     if (arrival.dataset.phase !== phase) {
       status.textContent = phase === 'map' ? 'India → Atal Tunnel → interactive demo. Sit back; no scrolling needed.' :
         phase === 'flight' ? 'Flying to the south portal. The demo follows automatically.' : 'Opening the interactive sensor demo.';
@@ -93,10 +96,10 @@ async function startArrival() {
   }
   function tick(timestamp) {
     if (finished || document.hidden) return;
-    if (lastTick) elapsed += Math.min(timestamp - lastTick, 100);
+    if (lastTick) elapsed += Math.min(timestamp - lastTick, elapsed < hold ? hold - elapsed : 100);
     lastTick = timestamp;
     paint();
-    if (elapsed < 5100) frame = requestAnimationFrame(tick);
+    if (elapsed < revealStart + 850) frame = requestAnimationFrame(tick);
     else complete(true, true);
   }
   function complete(scrollToDemo = false, autoplay = false) {

@@ -23,10 +23,10 @@ portal, automatically pass through clouds into the illustrative tunnel journey,
 discover useful workflows, distinguish internet loss from GPS loss,
 follow capture/estimation/evaluation, understand the difference from a route-only
 workflow, inspect evidence, then download and contribute responsibly.
-FIRST VIEWPORT: the map of India sits clear of copy, with SETU and a skip control
+FIRST VIEWPORT: the map of India fills a subtle background behind the copy, with SETU and a skip control
 above it, a mapped portal pin and coordinates below. Hold the decoded map for
-1.5 seconds, zoom for 2.4 seconds, then automatically scroll under full-screen
-white clouds and reveal the demo. The ~5.1-second sequence needs no user scrolling
+one second, zoom for 2.4 seconds, then automatically scroll under full-screen
+white clouds and reveal the demo. The ~4.6-second sequence needs no user scrolling
 and leaves no separate photographic hero or empty spacer behind.
 The larger interactive board follows with 1×–4× zoom, 1×–3× speed, play/pause and
 the same non-mirrored top-down map. Reconstruction and synthetic-sensor labels

@@ -20,9 +20,9 @@ cutaway and camera controls must work with keyboard and touch. The larger board
 offers 1×–4× view zoom and 1×–3× elapsed-time playback speed.
 
 Opening, approved by the owner: on a fresh root visit or reload, show the complete
-India map unobscured for 1.5 seconds, then zoom to Atal Tunnel's mapped south portal
+India map as a subtle full-screen background for one second, then zoom to Atal Tunnel's mapped south portal
 (32.3632307, 77.1331123). White clouds cover an automatic scroll to the demo, then
-clear without user input. The opening targets 5.1 seconds; slow frames extend it
+clear without user input. The opening targets 4.6 seconds; slow frames extend it
 rather than skipping the map, zoom or reveal. Hidden tabs pause the sequence;
 the illustrative journey then plays once. No tunnel photograph or separate portal
 hero remains: the product utilities and interactive demonstration lead the page.

@@ -19,7 +19,7 @@ Git and Vercel; the live download uses the hash-pinned GitHub asset instead.
 
 Fresh root visits and reloads start a skippable, fully automatic opening.
 `arrival.mjs` waits for the self-hosted India image to decode, holds the complete
-map for 1.5 seconds, then zooms to the actual OSM south-endpoint coordinates over
+map as a subtle, centred full-screen background for one second, then zooms to the actual OSM south-endpoint coordinates over
 2.4 seconds. Full-screen white clouds cover a 350ms automatic scroll to the demo;
 an 850ms dissolve reveals it and starts one illustrative journey. No scrolling,
 second click, photographic hero or separate portal reveal is required.
@@ -29,8 +29,8 @@ keyboard navigation or a changed section link cancels the sequence. Hidden tabs
 pause the opening clock. A missing map skips it rather than blocking the page.
 The only WebGL canvas stays in the demo; no renderer reparenting or snapshot is needed.
 
-The opening caps each visual step at 100ms, so a slow GPU cannot skip the zoom or
-reveal. Its nominal 5.1-second sequence can take longer on a busy device; this does
+The one-second hold uses elapsed time; zoom and reveal steps are capped at 100ms
+so a slow GPU cannot skip them. Its nominal 4.6-second sequence can take longer on a busy device; this does
 not change the sensor journey's elapsed-time playback or its speed controls.
 
 `landscape.mjs` builds photo-referenced portal geometry, terrain, ridges, rocks

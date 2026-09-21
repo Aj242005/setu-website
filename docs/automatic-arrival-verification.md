@@ -1,5 +1,16 @@
 # Automatic India-to-demo opening
 
+The 22 September refinement changes the hold to one second and makes the map a
+centred, full-viewport background at 30% image opacity, behind the opening copy.
+The nominal sequence is now 4.6 seconds; the historical 1.5-second layout and
+timings below describe the preceding checkpoint, not the current design.
+
+Focused checks at 1366×900, 390×844, 320×568 and 844×390 confirm all four map
+edges match the viewport, the image opacity is 0.30, and flight starts at 1000ms
+of hold time. The automatic scroll/play handoff, WebGL scene, reload, Skip and
+reduced-motion bypass pass without JavaScript exceptions. The release verifier
+also passes; no APK, sensor-model or geographic-source changes are included.
+
 Verified locally on 21 September 2026 using a separate-profile Headless Edge
 browser with SwiftShader WebGL2. This is website interaction verification, not
 Android device testing, training or navigation-accuracy evidence.

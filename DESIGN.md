@@ -23,7 +23,8 @@ sensor axes visible beside the board on wide screens. Use tabular figures,
 explicit units and mounting axes; no animated charts or extra sensor widgets.
 It stacks beneath the controls on narrow screens, never over the car/map.
 The opening is a temporary fixed overlay, not a scroll chapter or photographic
-hero. Keep the whole India map clear of text for 1.5 seconds; zoom for 2.4 seconds,
+hero. Keep India centred as a full-screen, low-opacity background behind readable
+copy, not a right-hand panel. Hold for one second; zoom for 2.4 seconds,
 cover the automatic scroll in white clouds, then dissolve into the demo. No scroll
 prompt or waiting/loading state at the end. Skip remains available throughout.
 Reduced-motion and section deep links bypass it; manual navigation interrupts it.
