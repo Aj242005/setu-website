@@ -16,7 +16,15 @@ landscape. Show GPS before entry, IMU-only drift in the tunnel, and gradual GPS
 correction after exit, with an inset tracking map. This browser illustration does
 not run the Android filter or model and is not field-accuracy evidence. Keep that
 distinction visible beside the controls. Pause, replay, timeline, sensor comparison,
-cutaway and camera controls must work with keyboard and touch.
+cutaway and camera controls must work with keyboard and touch. The larger board
+offers 1×–4× view zoom and 1×–3× elapsed-time playback speed.
+
+Opening, approved by the owner: on a fresh root visit or reload, fly from India
+to Atal Tunnel's mapped south portal (32.3632307, 77.1331123), fill the viewport
+with mist, then reveal the photo-referenced 3D landscape on scroll. Keep a clear
+skip button and reduced-motion/deep-link bypass. This is an artistic reconstruction,
+not surveyed terrain; the 30-second route is not the real 9.02 km tunnel length.
+Use real licensed material references, self-host assets and disclose provenance.
 
 The owner-supplied `setu-v0.1.0.apk` replaces the older download. Publish its actual
 signature/alignment/hash inspection, never transfer the old APK's device-test

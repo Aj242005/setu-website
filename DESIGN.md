@@ -5,18 +5,25 @@ Extend the Android visual system, not a new brand. Background #F4F6F2, paper
 rules #D9E1D4. System sans, 16–18px body, display up to 88px. All text remains
 selectable; narrow columns for reading, generous chapter spacing.
 
-An evidence-first field journal: open with the explicitly illustrative 3D tunnel
-journey, then the app and one real screenshot,
+An evidence-first field journal: open with an India-to-Atal-Tunnel fly-in and
+scroll-cleared mist, then the explicitly illustrative 3D tunnel journey,
+the app and one real screenshot,
 explain the collection journey, show evidence for the exact current APK, then make the beta
 download and responsible contribution steps concrete. No unlabelled synthetic maps, charts,
 reviews, counters or stock dashboard tiles. Use the existing SETU mark.
 
 Desktop pairs editorial copy with an actual phone capture; mobile places the
-action before the image. The tunnel diorama uses the same forest palette, solid
-materials, green terrain, concrete portals and a pearl car. Motion starts only
-on request; a timeline also works without animation. Pause when hidden/offscreen.
+action before the image. The landscape uses the same forest palette with real
+asphalt, rock, grass and concrete textures, depth-layered ridges, instanced firs,
+photo-referenced timber portal lettering and a pearl car. Keep the road and car
+clear in both overview and follow views; 1×–4× zoom centres on the car.
+Narrow screens start in follow view rather than reducing the car to a speck.
+The opening's 4.8-second map fly-in is the only automatic motion, with a persistent
+skip control and scroll-controlled reveal. Reduced-motion and section deep links
+bypass it. The sensor journey starts only on request, supports 1×–3× speed, and
+pauses when hidden/offscreen; its timeline also works without animation.
 The complete tunnel is visible before entry; its interior can open during the
-outage. Artifact-only previews show file checks and pending device validation,
+outage and stay open through recovery. Artifact-only previews show file checks and pending device validation,
 not the preceding APK's measured-results table.
 Visible focus, 44px controls, no hover-only content. Light is
 the default even on dark-system devices, matching the requested presentation.

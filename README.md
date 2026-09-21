@@ -17,6 +17,24 @@ Git and Vercel; the live download uses the hash-pinned GitHub asset instead.
 
 ## Interactive tunnel journey
 
+Fresh root visits and reloads start a skippable India-to-Atal-Tunnel fly-in.
+`arrival.mjs` projects the actual OSM south-endpoint coordinates into the
+self-hosted country map; scrolling clears a full-screen procedural cloud layer
+to reveal the landscape. `#simulation` and `#download` links, reduced-motion
+preferences and no-JavaScript visits bypass the opening. One WebGL canvas moves
+from the introduction into the interactive board; the introduction retains a
+still image rather than running a second renderer.
+
+`landscape.mjs` builds photo-referenced portal geometry, terrain, ridges, rocks
+and instanced vegetation using local licensed assets. This is not a surveyed
+digital twin or a full-length reconstruction of the 9.02 km tunnel. See
+[`docs/landscape-sources.md`](docs/landscape-sources.md) for coordinates, photo
+attributions, texture sources and the distinction between real geography and
+the compressed fictional sensor trip. If 3D is unavailable, the opening uses
+the attributed reference photograph and the board retains its 2D simulation.
+The browser test matrix and limitations are recorded in
+[`docs/arrival-verification.md`](docs/arrival-verification.md).
+
 `simulation-model.mjs` generates a deterministic 30-second fictional trip.
 Synthetic GPS is available before second 9, absent from seconds 9–21, and returns
 at second 21. Biased synthetic acceleration and yaw-rate measurements integrate
@@ -29,16 +47,21 @@ and uncertainty use that common projection, rather than a mirrored or stretched
 copy. Its orientation stays fixed when the 3D camera changes.
 
 `tunnel-scene.mjs` uses self-hosted Three.js 0.186.0 (MIT, `vendor/LICENSE`) to draw
-the terrain, curved tunnel and car. It loads only when the stage enters view.
+the terrain, curved tunnel and car. It loads for the opening or when the stage enters view.
 The sensor model, controls, accessible text and inset SVG map remain usable if
 WebGL or the renderer module is unavailable. There is no visitor GPS request,
 phone-sensor access, CDN dependency or Android/AI inference in this illustration.
 
 - Play/pause, restart or scrub the timeline; phase buttons jump to the key events.
 - Disable **Sensor bridge** to see the position freeze at the last GPS fix.
-- **Reveal tunnel interior** opens the near half of the roof during GPS loss.
+- **Reveal tunnel interior** opens the near half of the roof from GPS loss onward,
+  keeping the car visible through recovery; turn it off to inspect the full shell.
 - **Follow car** switches from the overview to a close tracking camera.
-- Motion starts only on request and pauses when hidden/offscreen. Keyboard and
+  Narrow screens start in the follow view so the car stays legible; **Overview**
+  remains available for the full scene.
+- **View zoom** offers 1×, 2×, 3× and 4× in both cameras; **Playback speed** offers
+  1×, 2× and 3× without changing the generated sensor data.
+- Journey motion starts only on request and pauses when hidden/offscreen. Keyboard and
   reduced-motion users can explore without playback; device pixel ratio is capped.
 
 A real browser Android demo is **not implemented**. A static Vercel deployment
