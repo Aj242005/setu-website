@@ -1,4 +1,25 @@
 .simulation-section { max-width: 1456px; padding-top: 24px; padding-bottom: 64px; }
+.simulation-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 18px; align-items: start; }
+.simulation-main { min-width: 0; }
+.sensor-panel { padding: 20px 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; }
+.sensor-panel-heading h2 { font-size: 21px; margin: 0 0 5px; }
+.sensor-panel-heading span { font-size: 12px; color: var(--forest); }
+.sensor-clock { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: var(--quiet); margin: 18px 0; }
+.sensor-clock output { font-variant-numeric: tabular-nums; }
+.sensor-group { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
+.sensor-group h3 { font-size: 15px; margin-bottom: 8px; }
+.sensor-group h3 small { font-size: 12px; font-weight: 400; color: var(--quiet); margin-left: 6px; }
+.sensor-status { display: block; color: var(--forest); font-size: 12px; margin: 0 0 12px; }
+.sensor-coordinates, .sensor-axes { margin: 0; font-variant-numeric: tabular-nums; }
+.sensor-coordinates div + div { margin-top: 12px; }
+.sensor-coordinates dt, .sensor-axes dt { font-size: 11px; color: var(--quiet); }
+.sensor-coordinates dd { margin: 2px 0 0; font-size: 18px; font-weight: 600; white-space: nowrap; }
+.sensor-axes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.sensor-axes dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; }
+.sensor-note, .sensor-mount { font-size: 12px; line-height: 1.6; color: var(--quiet); margin: 12px 0 0; }
+.sensor-mount { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
+@media (max-width: 1050px) { .simulation-layout { grid-template-columns: 1fr; } .sensor-panel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; } .sensor-panel-heading, .sensor-clock, .sensor-mount { grid-column: 1 / -1; } }
+@media (max-width: 700px) { .sensor-panel { display: block; } .sensor-coordinates { display: flex; gap: 18px; flex-wrap: wrap; } .sensor-coordinates div + div { margin-top: 0; } .sensor-axes dd { font-size: 18px; } }
 .simulation-intro { display: grid; grid-template-columns: 1.12fr 1fr; gap: 64px; align-items: end; margin-bottom: 32px; }
 .simulation-intro .kicker { margin-bottom: 16px; }
 .simulation-intro h1 { font-size: clamp(2.8rem, 4.7vw, 4.25rem); margin-bottom: 0; }

@@ -1,4 +1,5 @@
-export const PORTAL = Object.freeze({ latitude: 32.3632307, longitude: 77.1331123, osmNode: 4082425413 });
+import { PORTAL } from './simulation-model.mjs';
+export { PORTAL };
 
 export function projectIndia(longitude, latitude) {
   const mercator = value => Math.log(Math.tan(Math.PI / 4 + value * Math.PI / 360));

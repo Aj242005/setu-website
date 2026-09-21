@@ -29,7 +29,7 @@
       <div class="arrival-copy"><p class="kicker">India. Himachal Pradesh. Beyond the signal.</p><h2>Into the<br>mountains.</h2><p>Follow the map to Atal Tunnel. Then step through the mist and see what happens when the signal disappears.</p></div>
       <p class="arrival-caption">Preparing 3D. Reference photograph shown while the landscape loads.</p>
       <div class="arrival-location"><div class="arrival-place"><strong>Atal Tunnel · South portal</strong><span>32.36323° N, 77.13311° E · Himachal Pradesh</span><p id="arrival-status" role="status">Locating the tunnel on the map of India…</p></div><button id="arrival-continue" type="button" class="arrival-scroll">Scroll into the valley ↓</button></div>
-      <p class="arrival-credit">Map: Natural Earth · Location: OpenStreetMap · <a href="docs/landscape-sources.md">Scene references &amp; credits</a></p>
+      <p class="arrival-credit">India: DataMeet · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · <a href="docs/landscape-sources.md">Map &amp; scene sources</a></p>
     </div>
   </section>
   <header class="header wrap">
@@ -39,6 +39,7 @@
   <main id="main">
     <section class="simulation-section wrap" id="simulation" aria-labelledby="simulation-title">
       <div class="simulation-intro"><div><p class="kicker">A journey beyond the signal</p><h1 id="simulation-title">The signal fades.<br><em>The story continues.</em></h1></div><div><p class="intro">Follow a car into a tunnel. See how motion sensors can carry an estimate forward—and how returning GPS helps correct accumulated drift.</p><p class="simulation-disclaimer" id="simulation-disclaimer"><strong>Interactive concept, not a performance claim.</strong> Synthetic sensors and a simplified browser estimator. This does not run the Android app or its AI model.</p></div></div>
+      <div class="simulation-layout"><div class="simulation-main">
       <div class="simulation-stage" id="simulation-stage" data-phase="gps">
         <div id="scene-canvas" class="scene-canvas" aria-hidden="true"></div>
         <p class="scene-loading" id="scene-loading" role="status">Loading 3D… The map and controls work while it loads.</p>
@@ -53,6 +54,15 @@
         <div class="simulation-timeline"><label for="sim-time">Journey timeline</label><input id="sim-time" type="range" min="0" max="30" step="0.05" value="0" aria-valuetext="0 seconds, GPS connected" disabled><output id="sim-time-label" for="sim-time">0.0 / 30 s</output></div>
         <div class="simulation-options"><div class="simulation-phases" aria-label="Explore a journey phase"><button type="button" data-time="3" aria-pressed="true">Before the tunnel</button><button type="button" data-time="15" aria-pressed="false">GPS lost</button><button type="button" data-time="22.5" aria-pressed="false">GPS returns</button></div><div class="simulation-toggles"><label><input id="sim-sensors" type="checkbox" checked> Sensor bridge</label><label><input id="sim-cutaway" type="checkbox" checked> Reveal tunnel interior</label><button id="sim-camera" type="button" aria-pressed="false">Follow car</button></div></div>
       </div>
+      </div>
+      <aside class="sensor-panel" aria-labelledby="sensor-panel-title">
+        <div class="sensor-panel-heading"><h2 id="sensor-panel-title">Inside the car</h2><span>Dummy sensor feed</span></div>
+        <p class="sensor-clock">Journey sample <output id="sensor-sample-time">0.00 s</output><span id="sensor-playback-state">Paused</span></p>
+        <section class="sensor-group" aria-labelledby="sensor-gps-title"><h3 id="sensor-gps-title">GPS coordinates</h3><p id="sensor-gps-status" class="sensor-status">Simulated GPS fix</p><dl class="sensor-coordinates"><div><dt>Latitude</dt><dd id="sensor-latitude">—</dd></div><div><dt>Longitude</dt><dd id="sensor-longitude">—</dd></div></dl><p class="sensor-note">Illustrative coordinates near Atal Tunnel, not a surveyed route or your location.</p></section>
+        <section class="sensor-group" aria-labelledby="sensor-accel-title"><h3 id="sensor-accel-title">Accelerometer <small>m/s²</small></h3><dl class="sensor-axes"><div><dt>X</dt><dd id="sensor-accel-x">0.000</dd></div><div><dt>Y</dt><dd id="sensor-accel-y">0.000</dd></div><div><dt>Z</dt><dd id="sensor-accel-z">9.807</dd></div></dl><p class="sensor-note">Includes gravity. Forward acceleration drives the illustrative estimator.</p></section>
+        <section class="sensor-group" aria-labelledby="sensor-gyro-title"><h3 id="sensor-gyro-title">Gyroscope <small>°/s</small></h3><dl class="sensor-axes"><div><dt>X</dt><dd id="sensor-gyro-x">0.000</dd></div><div><dt>Y</dt><dd id="sensor-gyro-y">0.000</dd></div><div><dt>Z</dt><dd id="sensor-gyro-z">0.000</dd></div></dl><p class="sensor-note">Rotation around each axis. Yaw changes as the car turns.</p></section>
+        <p class="sensor-mount">Phone lying flat, screen up:<br><strong>X</strong> right · <strong>Y</strong> forward · <strong>Z</strong> up.<br>Illustrative readings stay synchronized with the timeline; no device sensors are accessed.</p>
+      </aside></div>
       <dl class="simulation-telemetry"><div><dt>Position source</dt><dd id="sim-source">GPS fixes</dd></div><div><dt>Synthetic gyro</dt><dd><span id="sim-gyro">0.0</span> <small>°/s</small></dd></div><div><dt>Forward acceleration</dt><dd><span id="sim-acceleration">0.0</span> <small>m/s²</small></dd></div><div><dt>Illustrative position error</dt><dd><span id="sim-error">0.0</span> <small>m</small></dd></div></dl>
       <p class="simulation-footnote">The landscape and south portal are photo-referenced to Atal Tunnel; the 30-second route compresses and illustrates a journey, not the real tunnel’s 9.02 km length. The blue marker is the estimate. Synthetic acceleration and gyro readings drive it without GPS fixes inside the tunnel. Distances, timing and uncertainty are illustrative, not supported outage durations for the APK. <a href="docs/landscape-sources.md">Geography, references &amp; asset credits</a>.</p>
       <noscript><p>The interactive journey needs JavaScript. The concept: GPS initializes position; sensor integration accumulates drift in the tunnel; returning GPS corrects the estimate. The Android download is a separate application.</p></noscript>

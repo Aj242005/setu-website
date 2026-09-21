@@ -30,6 +30,10 @@ The larger interactive board follows with 1×–4× zoom, 1×–3× speed, manua
 the same non-mirrored top-down map. Reconstruction and synthetic-sensor labels
 stay visible. Reduced-motion and deep-link users go directly to the page.
 The real Android screenshot and APK follow, clearly separate from the scene.
+The opening uses India's full official territorial depiction from open-licensed
+sources. A right-hand dummy sensor panel makes the mechanism inspectable: GPS
+coordinates disappear during the outage, while all six IMU axes stay synchronized
+with the car's timeline. It stacks after the controls on smaller screens.
 FORM: extend the existing field journal, not a replacement visual world. A playable
 tunnel diorama, one earlier real phone capture, an open utility index, a forest
 architecture passage, exact-build evidence and versioned release shelf. Native disclosure controls explain technical

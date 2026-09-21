@@ -36,6 +36,29 @@ frame rates, Safari and real mobile browser behavior were not measured here.
 
 ## Issues corrected during verification
 
+### Added scope: country outline and live instruments
+
+The right-hand panel was checked at 1366, 1050, 768, 390 and 320px. All 601
+generated frames have finite, deterministic X/Y/Z acceleration and gyroscope
+values. The panel matches the exact source frame at 0, 5, 9, 15, 20.95, 21 and
+30 seconds; GPS coordinates are absent during the outage and return with GPS.
+The local-coordinate origin maps exactly to the south portal. Gravity remains
+on the phone's vertical axis. Desktop uses a sidebar; narrower views stack the
+panel after the controls without horizontal overflow.
+Playback also continues when the mobile user scrolls from the 3D stage to the
+sensor panel. The Playing/Paused indicator follows that state; leaving the whole
+demo pauses it. Offscreen 3D drawing is skipped while the readings keep updating.
+
+The replacement India source includes samples in Gilgit, the Shaksgam region,
+Aksai Chin, Ladakh and Arunachal Pradesh. Islands are retained; Lakshadweep uses
+the more detailed OSM-derived source after the coarse composite missed a test
+point on Kavaratti. Andaman/Nicobar coverage includes Port Blair and Great Nicobar.
+This checks the requested territorial depiction, not survey-level border accuracy.
+All eight coverage samples pass against the **rendered SVG path**, not just the
+source dataset. Island strokes are strengthened without moving their coordinates.
+
+### Earlier corrections
+
 - Floating terrain edges, intrusive foreground scenery and obstructed car views.
 - Placeholder foliage, overly symmetric frontage and weak mountain silhouettes.
 - Bollards intersecting the car path and unsupported lamps in the cutaway.

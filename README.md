@@ -35,6 +35,29 @@ the attributed reference photograph and the board retains its 2D simulation.
 The browser test matrix and limitations are recorded in
 [`docs/arrival-verification.md`](docs/arrival-verification.md).
 
+The India outline follows the official Indian territorial depiction using
+DataMeet's open-licensed country composite, with OSM-derived Lakshadweep
+coastlines. It replaces Natural Earth's India polygon. The official reference,
+source commits, licences and original file hashes are in the source document;
+Survey of India's permission-restricted artwork is not redistributed.
+
+The right-side **Inside the car** panel uses the same 0.05-second timeline as the
+scene. GPS latitude/longitude are generated only for available simulated fixes;
+both readouts become dashes during seconds 9–21. Coordinates use a local tangent
+approximation anchored at the south portal, with a representative 19° bearing.
+They illustrate a short path near the tunnel, not a surveyed Atal Tunnel route.
+
+The flat phone's axes are X right, Y forward and Z up. Acceleration is in m/s²
+and includes approximately 9.80665 m/s² gravity on Z. Gyroscope values are in °/s;
+phone Z yaw has the opposite sign to the simulation's clockwise world heading.
+Forward acceleration and yaw correspond to the existing planar estimator;
+the additional axes provide deterministic illustrative vibration/lateral motion,
+not a new six-axis Android fusion model. Pause, scrub and playback speed apply
+to these readings too. The browser never requests the visitor's sensors or GPS.
+The feed keeps running while the stacked mobile panel is visible, with an explicit
+Playing/Paused indicator. Playback pauses outside the entire demo or in a hidden
+tab; offscreen 3D drawing is skipped while the panel remains in use.
+
 `simulation-model.mjs` generates a deterministic 30-second fictional trip.
 Synthetic GPS is available before second 9, absent from seconds 9–21, and returns
 at second 21. Biased synthetic acceleration and yaw-rate measurements integrate
@@ -47,7 +70,7 @@ and uncertainty use that common projection, rather than a mirrored or stretched
 copy. Its orientation stays fixed when the 3D camera changes.
 
 `tunnel-scene.mjs` uses self-hosted Three.js 0.186.0 (MIT, `vendor/LICENSE`) to draw
-the terrain, curved tunnel and car. It loads for the opening or when the stage enters view.
+the terrain, curved tunnel and car. It loads for the opening or when the demo enters view.
 The sensor model, controls, accessible text and inset SVG map remain usable if
 WebGL or the renderer module is unavailable. There is no visitor GPS request,
 phone-sensor access, CDN dependency or Android/AI inference in this illustration.

@@ -12,10 +12,44 @@ from an encyclopedia, or the nearby information-board pin.
 - Map data © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright).
 - Coordinates describe the mapped entrance, not a new survey or an accuracy guarantee.
 
-The country map is derived from [Natural Earth's 1:110m country data](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson),
-which is [public domain](https://www.naturalearthdata.com/about/terms-of-use/).
-It includes neighbouring countries for context. Boundaries are indicative, not a
-legal boundary map. The marker and the map share the same geographic projection.
+### India boundary depiction
+
+The owner requested the complete boundary depiction recognized by the Government
+of India. The earlier Natural Earth India polygon is no longer used for India.
+The replacement includes the full Indian territorial depiction, including
+Jammu and Kashmir, Ladakh, Aksai Chin, the Shaksgam region, Arunachal Pradesh,
+Lakshadweep and the Andaman and Nicobar Islands.
+
+- Boundary reference: [Survey of India, Government of India — Outline Maps](https://surveyofindia.gov.in/pages/outline-maps-of-india).
+- Rendered mainland/island data: [DataMeet's CC0 India composite](https://github.com/datameet/maps/blob/5ed214bf77788f99066e3542cccd4a52cb042896/Country/india-composite.geojson).
+  Its [dataset documentation](https://github.com/datameet/maps/blob/master/Country/README.md)
+  explicitly describes the inclusion of disputed territories in accordance with
+  the official Indian boundary. This is an open-data cartographic rendering, not
+  a map issued, endorsed or newly certified by the Government of India.
+- More detailed Lakshadweep coastlines: [OpenStreetMap contributors via DataMeet](https://github.com/datameet/maps/blob/5ecfea205eb7593f6b57253514069e38b94be559/Country/india-osm.geojson),
+  [ODbL](https://www.openstreetmap.org/copyright). The SVG is a produced map;
+  source geometry remains available at that link under its original licence.
+- Neighbouring-country context only: [Natural Earth 1:110m country data](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson),
+  [public domain](https://www.naturalearthdata.com/about/terms-of-use/).
+
+The country outline is projected into the same Mercator-style coordinate frame
+as the portal pin, with subpixel line simplification for the opening view. Islands
+are retained and labelled. It is not a cadastral or legal boundary survey.
+
+Survey of India's [copyright policy](https://surveyofindia.gov.in/pages/copyright-policy)
+requires written permission for reproducing its website material. Its downloaded
+outline was inspected as a reference, **not republished**. The website instead
+ships the independently licensed datasets identified above.
+
+Downloaded source SHA-256 values:
+
+- CC0 composite: `5e44c39b18aa8fe57267d8018fa4ad4a10eaa3aa4cb7cb7382a1813ef8eb8c53`
+- OSM-derived outline: `10bcf1649f16c16fcbd9cba5a4bc355c03fdad820f35084b49062130a1e55aa2`
+
+Research used public Survey of India pages and DataMeet's raw dataset documentation.
+The search-engine result page was not useful; the official pages and repository
+sources supplied the evidence. No browser escalation or permission-restricted
+government asset is required at visitor runtime.
 
 ## Photo references
 

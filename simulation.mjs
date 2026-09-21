@@ -1,4 +1,4 @@
-import { DURATION, ENTRY, EXIT, STEP, MAP_SCALE, buildSimulation, frameAt, mapPoint } from './simulation-model.mjs';
+import { DURATION, ENTRY, EXIT, STEP, MAP_SCALE, buildSimulation, frameAt, mapPoint, gpsCoordinates, phoneSensors } from './simulation-model.mjs';
 
 const stage = document.querySelector('#simulation-stage');
 const play = document.querySelector('#sim-play');
@@ -25,6 +25,7 @@ let sceneRequested = false;
 let lastPhase = '';
 let playbackSpeed = 1;
 let viewZoom = 1;
+let stageVisible = true;
 if (window.matchMedia('(max-width: 700px)').matches) {
   cameraButton.setAttribute('aria-pressed', 'true');
   cameraButton.textContent = 'Overview';
@@ -52,6 +53,7 @@ document.querySelector('#mini-tunnel').setAttribute('d', path(frames.filter(fram
 function render() {
   if (!playing) play.textContent = time >= DURATION ? 'Replay journey ↻' : 'Play journey ▶';
   const frame = frameAt(frames, time);
+  const coordinates = gpsCoordinates(frame), sensors = phoneSensors(frame);
   const enabled = sensorToggle.checked;
   const phase = phases[frame.phase];
   const current = enabled ? frame.estimate : frame.lastFix;
@@ -72,7 +74,7 @@ function render() {
     lastPhase = stateKey;
   }
   document.querySelector('#sim-source').textContent = !enabled ? frame.gps ? 'GPS fixes' : 'Last GPS fix' : phase[2];
-  document.querySelector('#sim-gyro').textContent = (frame.gyro * 180 / Math.PI).toFixed(1);
+  document.querySelector('#sim-gyro').textContent = sensors.gyroscope.z.toFixed(1);
   document.querySelector('#sim-acceleration').textContent = frame.acceleration.toFixed(2);
   document.querySelector('#sim-error').textContent = Math.hypot(current.x - frame.truth.x, current.z - frame.truth.z).toFixed(1);
   document.querySelector('#mini-gps').setAttribute('d', path(frames.slice(0, until).map(sample => sample.gps)));
@@ -87,7 +89,16 @@ function render() {
     button.setAttribute('aria-pressed', String(selected));
   }
   signal.textContent = frame.gps ? 'GPS' : enabled ? 'IMU estimate' : 'GPS lost';
-  scene?.update(frame, enabled);
+  document.querySelector('#sensor-gps-status').textContent = coordinates ? 'Simulated GPS fix' : 'GPS unavailable · no live fix';
+  document.querySelector('#sensor-latitude').textContent = coordinates ? `${coordinates.latitude.toFixed(6)}° N` : '—';
+  document.querySelector('#sensor-longitude').textContent = coordinates ? `${coordinates.longitude.toFixed(6)}° E` : '—';
+  document.querySelector('#sensor-sample-time').textContent = `${frame.time.toFixed(2)} s`;
+  document.querySelector('#sensor-playback-state').textContent = playing ? 'Playing' : 'Paused';
+  for (const axis of ['x', 'y', 'z']) {
+    document.querySelector(`#sensor-accel-${axis}`).textContent = sensors.acceleration[axis].toFixed(3);
+    document.querySelector(`#sensor-gyro-${axis}`).textContent = sensors.gyroscope[axis].toFixed(3);
+  }
+  if (stageVisible || document.documentElement.classList.contains('arrival-active')) scene?.update(frame, enabled);
 }
 
 function pause() {
@@ -96,6 +107,7 @@ function pause() {
     render();
   }
   playing = false; cancelAnimationFrame(animation);
+  document.querySelector('#sensor-playback-state').textContent = 'Paused';
   play.textContent = time >= DURATION ? 'Replay journey ↻' : 'Play journey ▶';
   stage.dataset.playing = 'false';
 }
@@ -113,6 +125,7 @@ play.addEventListener('click', () => {
   if (playing) { pause(); return; }
   if (time >= DURATION) time = 0;
   playing = true; lastTick = performance.now(); play.textContent = 'Pause journey Ⅱ';
+  document.querySelector('#sensor-playback-state').textContent = 'Playing';
   stage.dataset.playing = 'true'; animation = requestAnimationFrame(tick);
 });
 restart.addEventListener('click', () => { pause(); time = 0; render(); });
@@ -186,7 +199,12 @@ const visibility = new IntersectionObserver(entries => {
     if (entry.isIntersecting) loadScene(); else pause();
   }
 }, { threshold: 0.05 });
-visibility.observe(stage);
+visibility.observe(document.querySelector('.simulation-layout'));
+const sceneVisibility = new IntersectionObserver(entries => {
+  stageVisible = entries[0].isIntersecting;
+  if (stageVisible) render();
+});
+sceneVisibility.observe(stage);
 const arrival = document.querySelector('#arrival');
 if (arrival && !arrival.hidden) loadScene();
 window.addEventListener('setu-arrival-start', loadScene);

@@ -18,6 +18,10 @@ asphalt, rock, grass and concrete textures, depth-layered ridges, instanced firs
 photo-referenced timber portal lettering and a pearl car. Keep the road and car
 clear in both overview and follow views; 1×–4× zoom centres on the car.
 Narrow screens start in follow view rather than reducing the car to a speck.
+A right-hand instrument panel keeps GPS coordinates, sample time and six phone
+sensor axes visible beside the board on wide screens. Use tabular figures,
+explicit units and mounting axes; no animated charts or extra sensor widgets.
+It stacks beneath the controls on narrow screens, never over the car/map.
 The opening's 4.8-second map fly-in is the only automatic motion, with a persistent
 skip control and scroll-controlled reveal. Reduced-motion and section deep links
 bypass it. The sensor journey starts only on request, supports 1×–3× speed, and

@@ -25,6 +25,14 @@ with mist, then reveal the photo-referenced 3D landscape on scroll. Keep a clear
 skip button and reduced-motion/deep-link bypass. This is an artistic reconstruction,
 not surveyed terrain; the 30-second route is not the real 9.02 km tunnel length.
 Use real licensed material references, self-host assets and disclose provenance.
+The India map follows the complete official Indian territorial depiction, not
+Natural Earth's India boundary. Use open-licensed geography and cite the official
+reference without implying government endorsement.
+
+The board's right-hand panel shows simulated GPS coordinates only while GPS is
+available, plus all three accelerometer and gyroscope axes throughout the trip.
+Readings are deterministic dummy data for a flat, screen-up phone in the car,
+not visitor sensor access. On narrow screens the panel follows the controls.
 
 The owner-supplied `setu-v0.1.0.apk` replaces the older download. Publish its actual
 signature/alignment/hash inspection, never transfer the old APK's device-test

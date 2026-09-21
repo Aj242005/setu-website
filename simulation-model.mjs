@@ -3,6 +3,27 @@ export const ENTRY = 9;
 export const EXIT = 21;
 export const STEP = 0.05;
 export const MAP_SCALE = 200 / 124;
+export const PORTAL = Object.freeze({ latitude: 32.3632307, longitude: 77.1331123, osmNode: 4082425413 });
+
+export function gpsCoordinates(frame) {
+  if (!frame.gps) return null;
+  const entrance = roadAt(ENTRY / DURATION);
+  const along = frame.gps.x - entrance.x, across = frame.gps.z - entrance.z;
+  const bearing = 19 * Math.PI / 180;
+  const east = along * Math.sin(bearing) + across * Math.cos(bearing);
+  const north = along * Math.cos(bearing) - across * Math.sin(bearing);
+  return { latitude: PORTAL.latitude + north / 111320,
+    longitude: PORTAL.longitude + east / (111320 * Math.cos(PORTAL.latitude * Math.PI / 180)) };
+}
+
+export function phoneSensors(frame) {
+  return {
+    acceleration: { x: frame.truth.speed * frame.gyro + 0.018 * Math.sin(frame.time * 2.4),
+      y: frame.acceleration, z: 9.80665 + 0.035 * Math.sin(frame.time * 4.1) },
+    gyroscope: { x: 0.4 * Math.sin(frame.time * 1.9), y: 0.2 * Math.cos(frame.time * 1.3),
+      z: -frame.gyro * 180 / Math.PI },
+  };
+}
 
 export function mapPoint(position) {
   return [20 + (position.x + 62) * MAP_SCALE, 66 + position.z * MAP_SCALE];
