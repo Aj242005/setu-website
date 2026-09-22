@@ -19,7 +19,7 @@ Git and Vercel; the live download uses the hash-pinned GitHub asset instead.
 
 Fresh root visits and reloads start a skippable, fully automatic opening.
 `arrival.mjs` waits for the self-hosted India image to decode, holds the complete
-map as a subtle, centred full-screen background for one second, then zooms to the actual OSM south-endpoint coordinates over
+map as a subtle, centred full-screen background for 0.65 seconds, then zooms to the actual OSM south-endpoint coordinates over
 2.4 seconds. Full-screen white clouds cover a 350ms automatic scroll to the demo;
 an 850ms dissolve reveals it and starts one illustrative journey. No scrolling,
 second click, photographic hero or separate portal reveal is required.
@@ -29,8 +29,8 @@ keyboard navigation or a changed section link cancels the sequence. Hidden tabs
 pause the opening clock. A missing map skips it rather than blocking the page.
 The only WebGL canvas stays in the demo; no renderer reparenting or snapshot is needed.
 
-The one-second hold uses elapsed time; zoom and reveal steps are capped at 100ms
-so a slow GPU cannot skip them. Its nominal 4.6-second sequence can take longer on a busy device; this does
+The 0.65-second hold uses elapsed time; zoom and reveal steps are capped at 100ms
+so a slow GPU cannot skip them. Its nominal 4.25-second sequence can take longer on a busy device; this does
 not change the sensor journey's elapsed-time playback or its speed controls.
 
 `landscape.mjs` builds photo-referenced portal geometry, terrain, ridges, rocks
@@ -54,6 +54,15 @@ scene. GPS latitude/longitude are generated only for available simulated fixes;
 both readouts become dashes during seconds 9–21. Coordinates use a local tangent
 approximation anchored at the south portal, with a representative 19° bearing.
 They illustrate a short path near the tunnel, not a surveyed Atal Tunnel route.
+
+**Edge-device ML** shows explicitly simulated model readings: speed (m/s), signed
+track-relative heading (degrees, zero along scene +X) and uncertainty radius (m).
+These reuse the browser estimator's current frame; they are not learned inference,
+a measured confidence interval or an Android performance benchmark. The status
+shows GPS anchoring, sensor-only estimation and returning-GPS correction. With
+the sensor bridge off, the readings remain visible as a labelled preview rather
+than being represented as the map's active position source. They share the same
+pause, restart, scrubbing and speed controls as the sensor readings.
 
 The flat phone's axes are X right, Y forward and Z up. Acceleration is in m/s²
 and includes approximately 9.80665 m/s² gravity on Z. Gyroscope values are in °/s;

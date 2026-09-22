@@ -94,6 +94,12 @@ function render() {
   document.querySelector('#sensor-longitude').textContent = coordinates ? `${coordinates.longitude.toFixed(6)}° E` : '—';
   document.querySelector('#sensor-sample-time').textContent = `${frame.time.toFixed(2)} s`;
   document.querySelector('#sensor-playback-state').textContent = playing ? 'Playing' : 'Paused';
+  document.querySelector('#model-speed').textContent = frame.estimate.speed.toFixed(2);
+  document.querySelector('#model-heading').textContent = (Math.atan2(Math.sin(frame.estimate.heading), Math.cos(frame.estimate.heading)) * 180 / Math.PI).toFixed(1);
+  document.querySelector('#model-radius').textContent = frame.radius.toFixed(2);
+  document.querySelector('#model-status').textContent = !enabled ? 'Preview only · sensor bridge off' :
+    frame.phase === 'imu' ? 'Sensor-only estimate · GPS unavailable' :
+      frame.phase === 'recovery' ? 'Returning GPS corrects the estimate' : 'GPS-anchored estimate';
   for (const axis of ['x', 'y', 'z']) {
     document.querySelector(`#sensor-accel-${axis}`).textContent = sensors.acceleration[axis].toFixed(3);
     document.querySelector(`#sensor-gyro-${axis}`).textContent = sensors.gyroscope[axis].toFixed(3);

@@ -16,9 +16,15 @@
 .sensor-coordinates dd { margin: 2px 0 0; font-size: 18px; font-weight: 600; white-space: nowrap; }
 .sensor-axes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .sensor-axes dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; }
+.model-readings { margin: 0; font-variant-numeric: tabular-nums; }
+.model-readings div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+.model-readings dt { font-size: 12px; color: var(--quiet); }
+.model-readings dd { margin: 0; font-size: 17px; font-weight: 600; white-space: nowrap; }
+.model-readings small { font-size: 11px; font-weight: 400; color: var(--quiet); }
+#model-status { margin-top: 12px; margin-bottom: 0; }
 .sensor-note, .sensor-mount { font-size: 12px; line-height: 1.6; color: var(--quiet); margin: 12px 0 0; }
 .sensor-mount { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
-@media (max-width: 1050px) { .simulation-layout { grid-template-columns: 1fr; } .sensor-panel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; } .sensor-panel-heading, .sensor-clock, .sensor-mount { grid-column: 1 / -1; } }
+@media (max-width: 1050px) { .simulation-layout { grid-template-columns: 1fr; } .sensor-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; } .sensor-panel-heading, .sensor-clock, .sensor-mount { grid-column: 1 / -1; } }
 @media (max-width: 700px) { .sensor-panel { display: block; } .sensor-coordinates { display: flex; gap: 18px; flex-wrap: wrap; } .sensor-coordinates div + div { margin-top: 0; } .sensor-axes dd { font-size: 18px; } }
 .simulation-intro { display: grid; grid-template-columns: 1.12fr 1fr; gap: 64px; align-items: end; margin-bottom: 32px; }
 .simulation-intro .kicker { margin-bottom: 16px; }

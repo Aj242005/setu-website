@@ -53,8 +53,14 @@
       </div>
       </div>
       <aside class="sensor-panel" aria-labelledby="sensor-panel-title">
-        <div class="sensor-panel-heading"><h2 id="sensor-panel-title">Inside the car</h2><span>Dummy sensor feed</span></div>
+        <div class="sensor-panel-heading"><h2 id="sensor-panel-title">Inside the car</h2><span>Dummy sensors &amp; model readings</span></div>
         <p class="sensor-clock">Journey sample <output id="sensor-sample-time">0.00 s</output><span id="sensor-playback-state">Paused</span></p>
+        <section class="sensor-group" aria-labelledby="edge-model-title">
+          <h3 id="edge-model-title">Edge-device ML</h3><p class="sensor-status">Simulated model output</p>
+          <dl class="model-readings"><div><dt>Speed estimate</dt><dd><span id="model-speed">—</span> <small>m/s</small></dd></div><div><dt>Track heading</dt><dd><span id="model-heading">—</span> <small>°</small></dd></div><div><dt>Uncertainty radius</dt><dd><span id="model-radius">—</span> <small>m</small></dd></div></dl>
+          <p id="model-status" class="sensor-status">GPS-anchored estimate</p>
+          <p class="sensor-note">Dummy readings from the browser estimator, not the Android ML model. Heading is relative to track +X, not compass north.</p>
+        </section>
         <section class="sensor-group" aria-labelledby="sensor-gps-title"><h3 id="sensor-gps-title">GPS coordinates</h3><p id="sensor-gps-status" class="sensor-status">Simulated GPS fix</p><dl class="sensor-coordinates"><div><dt>Latitude</dt><dd id="sensor-latitude">—</dd></div><div><dt>Longitude</dt><dd id="sensor-longitude">—</dd></div></dl><p class="sensor-note">Illustrative coordinates near Atal Tunnel, not a surveyed route or your location.</p></section>
         <section class="sensor-group" aria-labelledby="sensor-accel-title"><h3 id="sensor-accel-title">Accelerometer <small>m/s²</small></h3><dl class="sensor-axes"><div><dt>X</dt><dd id="sensor-accel-x">0.000</dd></div><div><dt>Y</dt><dd id="sensor-accel-y">0.000</dd></div><div><dt>Z</dt><dd id="sensor-accel-z">9.807</dd></div></dl><p class="sensor-note">Includes gravity. Forward acceleration drives the illustrative estimator.</p></section>
         <section class="sensor-group" aria-labelledby="sensor-gyro-title"><h3 id="sensor-gyro-title">Gyroscope <small>°/s</small></h3><dl class="sensor-axes"><div><dt>X</dt><dd id="sensor-gyro-x">0.000</dd></div><div><dt>Y</dt><dd id="sensor-gyro-y">0.000</dd></div><div><dt>Z</dt><dd id="sensor-gyro-z">0.000</dd></div></dl><p class="sensor-note">Rotation around each axis. Yaw changes as the car turns.</p></section>

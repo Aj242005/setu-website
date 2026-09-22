@@ -35,7 +35,7 @@ async function startArrival() {
   const [targetX, targetY] = projectIndia(PORTAL.longitude, PORTAL.latitude);
   const texture = context ? cloudTexture() : null;
   const listeners = new AbortController();
-  const hold = 1000;
+  const hold = 650;
   const flightEnd = hold + 2400;
   const revealStart = flightEnd + 350;
   let elapsed = 0;

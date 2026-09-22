@@ -20,9 +20,9 @@ cutaway and camera controls must work with keyboard and touch. The larger board
 offers 1×–4× view zoom and 1×–3× elapsed-time playback speed.
 
 Opening, approved by the owner: on a fresh root visit or reload, show the complete
-India map as a subtle full-screen background for one second, then zoom to Atal Tunnel's mapped south portal
+India map as a subtle full-screen background for 0.65 seconds, then zoom to Atal Tunnel's mapped south portal
 (32.3632307, 77.1331123). White clouds cover an automatic scroll to the demo, then
-clear without user input. The opening targets 4.6 seconds; slow frames extend it
+clear without user input. The opening targets 4.25 seconds; slow frames extend it
 rather than skipping the map, zoom or reveal. Hidden tabs pause the sequence;
 the illustrative journey then plays once. No tunnel photograph or separate portal
 hero remains: the product utilities and interactive demonstration lead the page.
@@ -38,6 +38,10 @@ The board's right-hand panel shows simulated GPS coordinates only while GPS is
 available, plus all three accelerometer and gyroscope axes throughout the trip.
 Readings are deterministic dummy data for a flat, screen-up phone in the car,
 not visitor sensor access. On narrow screens the panel follows the controls.
+An Edge-device ML section adds dummy speed, track-relative heading and uncertainty
+readings from the same browser estimator. It follows playback and GPS-loss/recovery
+states, and is labelled a preview when the sensor bridge is off. It does not run
+the Android model or claim measured ML accuracy, confidence or inference latency.
 
 The owner-supplied `setu-v0.1.0.apk` replaces the older download. Publish its actual
 signature/alignment/hash inspection, never transfer the old APK's device-test

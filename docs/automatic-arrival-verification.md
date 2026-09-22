@@ -1,8 +1,22 @@
 # Automatic India-to-demo opening
 
-The 22 September refinement changes the hold to one second and makes the map a
+Latest configuration: the opening hold is now **650ms**, with a nominal 4.25-second
+sequence. The full-screen 30%-opacity map remains. The preceding one-second and
+1.5-second timing results below are historical checkpoints.
+
+The Edge-device ML readouts are explicitly dummy outputs from the existing browser
+estimator: speed, track-relative heading and illustrative uncertainty radius. All
+601 source frames produce finite readings. Checks at 0, 3, 9, 15, 20.95, 21, 22.5,
+26 and 30 seconds match their exact source frames. GPS-loss/recovery status,
+bridge-off preview, pause, restart, 3× playback and offscreen pause pass. Layouts
+at 1366, 1050, 768, 390 and 320px have no horizontal overflow; tablet uses two
+columns and phone uses one. Opening checks confirm the configured hold ends at
+650ms and preserve the full-screen background, automatic handoff, WebGL, reload,
+Skip and reduced-motion paths. These are UI checks, not ML accuracy evidence.
+
+The earlier 22 September refinement used a one-second hold and made the map a
 centred, full-viewport background at 30% image opacity, behind the opening copy.
-The nominal sequence is now 4.6 seconds; the historical 1.5-second layout and
+Its nominal sequence was 4.6 seconds; the historical 1.5-second layout and
 timings below describe the preceding checkpoint, not the current design.
 
 Focused checks at 1366×900, 390×844, 320×568 and 844×390 confirm all four map

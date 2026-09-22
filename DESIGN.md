@@ -19,12 +19,13 @@ photo-referenced timber portal lettering and a pearl car. Keep the road and car
 clear in both overview and follow views; 1×–4× zoom centres on the car.
 Narrow screens start in follow view rather than reducing the car to a speck.
 A right-hand instrument panel keeps GPS coordinates, sample time and six phone
-sensor axes visible beside the board on wide screens. Use tabular figures,
-explicit units and mounting axes; no animated charts or extra sensor widgets.
+sensor axes visible beside the board on wide screens. Lead with clearly labelled
+dummy edge-ML speed, track heading and uncertainty readings. Use tabular figures,
+explicit units and mounting axes; no invented confidence scores or benchmark charts.
 It stacks beneath the controls on narrow screens, never over the car/map.
 The opening is a temporary fixed overlay, not a scroll chapter or photographic
 hero. Keep India centred as a full-screen, low-opacity background behind readable
-copy, not a right-hand panel. Hold for one second; zoom for 2.4 seconds,
+copy, not a right-hand panel. Hold for 0.65 seconds; zoom for 2.4 seconds,
 cover the automatic scroll in white clouds, then dissolve into the demo. No scroll
 prompt or waiting/loading state at the end. Skip remains available throughout.
 Reduced-motion and section deep links bypass it; manual navigation interrupts it.

@@ -25,8 +25,8 @@ follow capture/estimation/evaluation, understand the difference from a route-onl
 workflow, inspect evidence, then download and contribute responsibly.
 FIRST VIEWPORT: the map of India fills a subtle background behind the copy, with SETU and a skip control
 above it, a mapped portal pin and coordinates below. Hold the decoded map for
-one second, zoom for 2.4 seconds, then automatically scroll under full-screen
-white clouds and reveal the demo. The ~4.6-second sequence needs no user scrolling
+0.65 seconds, zoom for 2.4 seconds, then automatically scroll under full-screen
+white clouds and reveal the demo. The ~4.25-second sequence needs no user scrolling
 and leaves no separate photographic hero or empty spacer behind.
 The larger interactive board follows with 1×–4× zoom, 1×–3× speed, play/pause and
 the same non-mirrored top-down map. Reconstruction and synthetic-sensor labels
@@ -38,6 +38,10 @@ The opening uses India's full official territorial depiction from open-licensed
 sources. A right-hand dummy sensor panel makes the mechanism inspectable: GPS
 coordinates disappear during the outage, while all six IMU axes stay synchronized
 with the car's timeline. It stacks after the controls on smaller screens.
+The same panel includes simulated edge-device ML speed, track-relative heading
+and uncertainty, explicitly sourced from the browser estimator rather than a
+running Android model. Its status distinguishes GPS anchoring, sensor-only
+estimation, GPS correction and the bridge-off preview.
 FORM: extend the existing field journal, not a replacement visual world. A playable
 tunnel diorama, one earlier real phone capture, an open utility index, a forest
 architecture passage, exact-build evidence and versioned release shelf. Native disclosure controls explain technical
